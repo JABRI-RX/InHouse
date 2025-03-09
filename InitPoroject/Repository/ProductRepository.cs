@@ -1,3 +1,4 @@
+using System.Diagnostics;
 using System.Security.Principal;
 using InitPoroject.Data;
 using InitPoroject.Domain.Entity;
@@ -17,7 +18,7 @@ public class ProductRepository : IProductRepository
     {
         _context = context;
     }
-    
+
 
     public async Task<IList<Product>> GetAllProductsAsync(QueryObject queryObject)
     {
@@ -27,36 +28,31 @@ public class ProductRepository : IProductRepository
             throw new ArgumentNullException("queryObject Null");
         }
 
-        if (string.IsNullOrWhiteSpace(queryObject.SortBy))
-            return await products.ToListAsync();
-        switch (queryObject.SortBy)
+        if (!string.IsNullOrWhiteSpace(queryObject.SortBy))
         {
-            case "Name":
-                products = queryObject.IsDescending 
-                    ? products.OrderByDescending(p=>p.Name)
-                    : products.OrderBy(p=>p.Name);
-                break;
-            case "Price":
-                products = queryObject.IsDescending 
-                    ? products.OrderByDescending(p=>p.Price)
-                    : products.OrderBy(p=>p.Price);
-                break;
-            case "Category":
-                products = queryObject.IsDescending 
-                    ? products.OrderByDescending(p=>p.Category)
-                    : products.OrderBy(p=>p.Category);
-                break;
-            case "Quantity":
-                products = queryObject.IsDescending 
-                    ? products.OrderByDescending(p=>p.Quantity)
-                    : products.OrderBy(p=>p.Quantity);
-                break;
-            case "CreatedAt":
-                products = queryObject.IsDescending 
-                    ? products.OrderByDescending(p=>p.CreatedAt)
-                    : products.OrderBy(p=>p.CreatedAt);
-            break;
+            var sortBy = queryObject.SortBy.ToLower();
+            var isDescending = queryObject.IsDescending;
+            products = sortBy switch
+            {
+                "name" => isDescending 
+                    ? products.OrderByDescending(p => p.Name) 
+                    : products.OrderBy(p => p.Name),
+                "price" => isDescending 
+                    ? products.OrderByDescending(p => p.Price) 
+                    : products.OrderBy(p => p.Price),
+                "category" => isDescending
+                    ? products.OrderByDescending(p => p.Category)
+                    : products.OrderBy(p => p.Category),
+                "quantity" => isDescending
+                    ? products.OrderByDescending(p => p.Quantity)
+                    : products.OrderBy(p => p.Quantity),
+                "createdat" => isDescending
+                    ? products.OrderByDescending(p => p.CreatedAt)
+                    : products.OrderBy(p => p.CreatedAt),
+                _ => products // If no valid sort field is provided, return as is
+            };
         }
+
         return await products.ToListAsync();
     }
 
@@ -75,7 +71,7 @@ public class ProductRepository : IProductRepository
 
     public async Task<IList<Product>?> GetProductsByName(string name)
     {
-        return await _context.Products.Where(p=>p.Name.Contains(name))
+        return await _context.Products.Where(p => p.Name.Contains(name))
             .ToListAsync();
     }
 

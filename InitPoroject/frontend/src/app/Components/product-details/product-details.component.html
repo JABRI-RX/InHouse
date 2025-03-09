@@ -1,0 +1,34 @@
+<div class="card bg-base-100 shadow-xl p-4">
+   <div class="card-body">
+      <table class="table w-full border border-gray-300 rounded-lg">
+         <tbody>
+         <tr class="hover:bg-gray-100">
+            <td class="border px-4 py-2 font-medium"> Name</td>
+            <td class="border px-4 py-2">{{ product?.name }}</td>
+         </tr>
+         <tr class="hover:bg-gray-100">
+            <td class="border px-4 py-2 font-medium"> Price</td>
+            <td class="border px-4 py-2 text-green-600 font-semibold">
+               ${{ product?.price }}
+            </td>
+         </tr>
+         <tr class="hover:bg-gray-100">
+            <td class="border px-4 py-2 font-medium"> Quantity</td>
+            <td class="border px-4 py-2">{{ product?.quantity }}</td>
+         </tr>
+         <tr class="hover:bg-gray-100">
+            <td class="border px-4 py-2 font-medium"> Category</td>
+            <td class="border px-4 py-2">{{ product?.category }}</td>
+         </tr>
+         <tr class="hover:bg-gray-100">
+            <td class="border px-4 py-2 font-medium"> Colors</td>
+            <td class="border px-4 py-2">{{ product?.colors }}</td>
+         </tr>
+         <tr class="hover:bg-gray-100">
+            <td class="border px-4 py-2 font-medium"> Created At</td>
+            <td class="border px-4 py-2">{{ product?.createdAt | date:'longDate' }}</td>
+         </tr>
+         </tbody>
+      </table>
+   </div>
+</div>

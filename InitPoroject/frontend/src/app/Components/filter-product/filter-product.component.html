@@ -1,0 +1,67 @@
+<div class="m-8 card bg-base-100 shadow-xl p-4">
+   <p class="text-xl font-bold">Filter Product</p>
+   <form [formGroup]="filterProductForm" >
+      <div class=" grid grid-cols-3 gap-3">
+         <fieldset class="fieldset">
+            <legend class="fieldset-legend">  Name</legend>
+            <input type="text" formControlName="name" class="input"  />
+         </fieldset>
+         <fieldset class="fieldset">
+            <legend class="fieldset-legend">  Price</legend>
+            <input type="text" formControlName="price" class="input"  />
+         </fieldset>
+
+      </div>
+      <div class="grid grid-cols-3 gap-3">
+         <fieldset class="fieldset">
+            <legend class="fieldset-legend">  Quantity</legend>
+            <input type="text"  formControlName="quantity" class="input" />
+         </fieldset>
+         <fieldset class="fieldset">
+            <legend class="fieldset-legend">  Category</legend>
+            <input type="text" formControlName="category" class="input"  />
+         </fieldset>
+      </div>
+      <div class=" grid grid-cols-3 gap-3">
+
+
+<!--         <fieldset class="fieldset">-->
+<!--            <legend class="fieldset-legend">  Colors</legend>-->
+
+<!--            <div class="relative w-72">-->
+<!--               &lt;!&ndash; Dropdown Button &ndash;&gt;-->
+<!--               <div class="dropdown dropdown-top">-->
+<!--                  <label tabindex="0" class="btn btn-outline w-full">-->
+<!--                     {{ selected.length > 0 ? selected.join(', ') : 'Select options' }}-->
+<!--                  </label>-->
+
+<!--                  &lt;!&ndash; Dropdown Content &ndash;&gt;-->
+<!--                  <ul tabindex="0" class="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-52">-->
+<!--                     <li *ngFor="let option of options" class="flex items-center">-->
+<!--                        <label class="cursor-pointer flex items-center gap-2">-->
+<!--                           <input-->
+<!--                              type="checkbox"-->
+<!--                              [checked]="selected.includes(option)"-->
+<!--                              (change)="toggleSelect(option)"-->
+<!--                              class="checkbox checkbox-neutral"-->
+<!--                           />-->
+<!--                           {{ option }}-->
+<!--                        </label>-->
+<!--                     </li>-->
+<!--                  </ul>-->
+<!--               </div>-->
+<!--               &lt;!&ndash; Selected Tags &ndash;&gt;-->
+<!--               <div class="mt-2 flex flex-wrap gap-2">-->
+<!--                  <div *ngFor="let item of selected" class="badge badge-neutral gap-2">-->
+<!--                     {{ item }}-->
+<!--                     <button (click)="removeSelection(item)" class="ml-1 text-white">✕</button>-->
+<!--                  </div>-->
+<!--               </div>-->
+<!--            </div>-->
+<!--         </fieldset>-->
+
+      </div>
+      <div class="flex justify-end">
+         <button class="btn btn-success"(click)="filterProducts()">Filter</button>
+      </div></form>
+</div>

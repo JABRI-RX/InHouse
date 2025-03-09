@@ -19,6 +19,7 @@ public class ProductController : ControllerBase
     [HttpGet]
     public async Task<IActionResult> GetAllProduct([FromQuery] QueryObject queryObject)
     {
+        await Task.Delay(500);
         var products = await _productRepository.GetAllProductsAsync(queryObject); 
         return  Ok(products);
     }

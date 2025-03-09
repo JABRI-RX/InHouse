@@ -4,7 +4,17 @@ using InitPoroject.Repository;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
-
+var myPolicy = "AllowFrontEnd";
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy(name: myPolicy,
+        policy =>
+        {
+            policy.WithOrigins("*")
+                .WithMethods("POST","GET","PUT","DELETE")
+                .AllowAnyHeader();
+        });
+});
 // Add services to the container.
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddControllers();
@@ -29,7 +39,7 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+app.UseCors(myPolicy);
 app.MapControllers();
-
 app.Run();
  

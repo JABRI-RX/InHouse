@@ -30,4 +30,8 @@
       </Content>
     </ItemGroup>
 
+    <ItemGroup>
+      <Folder Include="frontend\src\app\Services\" />
+    </ItemGroup>
+
 </Project>

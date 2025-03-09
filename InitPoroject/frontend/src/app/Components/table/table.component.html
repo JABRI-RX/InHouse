@@ -1,0 +1,169 @@
+<div class="toast toast-top toast-end z-1" *ngIf="state().stat">
+   <div class="alert alert-info">
+      <span>{{ state().text }}</span>
+   </div>
+</div>
+<div>
+   <app-filter-product (filterProductsEvent)="filterProducts($event)"></app-filter-product>
+</div>
+<div class="overflow-x-auto mt-3 p-4">
+   @if (state().stat){
+      <div class="flex justify-center">
+         <span class="loading loading-spinner loading-xl">Loading</span>
+      </div>
+   } @else {
+      <table class="table rounded-2xl ">
+         <!-- head -->
+         <thead class="bg-[#272c34] text-white ">
+         <tr>
+            <th></th>
+            <th>Name</th>
+            <th>Price</th>
+            <th>Quantity</th>
+            <th>Category</th>
+            <th>Colors</th>
+            <th>CreatedAt</th>
+            <th>Actions</th>
+         </tr>
+         </thead>
+         <tbody>
+         <!-- row 2 -->
+            @for (product of products; track product.id) {
+               <tr class="hover:bg-base-300">
+                  <th> </th>
+                  <td>{{ product.name }}</td>
+                  <td>{{ product.price }}</td>
+                  <td>{{ product.quantity }}</td>
+                  <td>{{ product.category }}</td>
+                  <td>{{ product.colors }}</td>
+                  <td>{{ product.createdAt | date:'longDate' }}</td>
+                  <div class="space-x-1">
+                     <!--                  Edit-->
+                     <button class="btn btn-warning" (click)='showModel("editModel"+product.id)'>Edit</button>
+                     <dialog id="editModel{{product.id}}" class="modal">
+                        <div class="modal-box">
+                           <h3 class="text-lg font-bold">Edit Product</h3>
+                           <form>
+                              <fieldset class="fieldset">
+                                 <legend class="fieldset-legend">Name</legend>
+                                 <input type="text" class="input" value="{{product.name}}"/>
+                              </fieldset>
+                              <fieldset class="fieldset">
+                                 <legend class="fieldset-legend">Price</legend>
+                                 <input type="text" class="input" value="{{product.price}}"/>
+                              </fieldset>
+                              <fieldset class="fieldset">
+                                 <legend class="fieldset-legend">Quantity</legend>
+                                 <input type="text" class="input" value="{{product.quantity}}"/>
+                              </fieldset>
+                              <fieldset class="fieldset">
+                                 <legend class="fieldset-legend">Category</legend>
+                                 <input type="text" class="input" value="{{product.category}}"/>
+                              </fieldset>
+                              <fieldset class="fieldset">
+                                 <legend class="fieldset-legend">Colors</legend>
+                                 <div class="relative w-72">
+                                    <!-- Dropdown Button -->
+                                    <div class="dropdown dropdown-top">
+                                       <label tabindex="0" class="btn btn-outline w-full">
+                                          {{ selected.length > 0 ? selected.join(', ') : 'Select options' }}
+                                       </label>
+
+                                       <!-- Dropdown Content -->
+                                       <ul tabindex="0"
+                                           class="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-52">
+                                          <li *ngFor="let option of options" class="flex items-center">
+                                             <label class="cursor-pointer flex items-center gap-2">
+                                                <input
+                                                   type="checkbox"
+                                                   [checked]="selected.includes(option)"
+                                                   (change)="toggleSelect(option)"
+                                                   class="checkbox checkbox-neutral"
+                                                />
+                                                {{ option }}
+                                             </label>
+                                          </li>
+                                       </ul>
+                                    </div>
+                                    <!-- Selected Tags -->
+                                    <div class="mt-2 flex flex-wrap gap-2">
+                                       <div *ngFor="let item of selected" class="badge badge-neutral gap-2">
+                                          {{ item }}
+                                          <button (click)="removeSelection(item)" class="ml-1 text-white">✕</button>
+                                       </div>
+                                    </div>
+                                 </div>
+
+                              </fieldset>
+                              <fieldset class="fieldset">
+                                 <legend class="fieldset-legend">Category</legend>
+                                 <input type="text" class="input" value="{{product.name}}"/>
+                              </fieldset>
+                           </form>
+                           <div class="modal-action">
+                              <form method="dialog" class="space-x-2">
+                                 <!-- if there is a button in form, it will close the modal -->
+                                 <button class="btn">Close</button>
+                                 <button class="btn btn-warning">Edit</button>
+                              </form>
+                           </div>
+                        </div>
+                     </dialog>
+                     <!--                  Details-->
+                     <button class="btn btn-neutral" (click)='showModel("detailModel"+product.id)'>Details</button>
+                     <dialog id="detailModel{{product.id}}" class="modal">
+                        <div class="modal-box">
+                           <h3 class="text-lg font-bold">Product Detail</h3>
+                           <app-product-details [product]="product"></app-product-details>
+                           <div class="modal-action">
+                              <form method="dialog">
+                                 <!-- if there is a button in form, it will close the modal -->
+                                 <button class="btn">Close</button>
+                              </form>
+                           </div>
+                        </div>
+                     </dialog>
+                     <!--                  Remove-->
+                     <button class="btn btn-error"
+                             (click)='showModel("deleteModel"+product.id)'>Remove
+                     </button>
+                     <dialog id="deleteModel{{product.id}}" class="modal">
+                        <div class="modal-box">
+                           <h3 class="text-lg font-bold">Delete Product</h3>
+                           <p class="py-4">Are You Sure You Want To Delete This Product {{ product.name }}</p>
+                           <div class="modal-action">
+                              <form method="dialog" class="space-x-2">
+                                 <!-- if there is a button in form, it will close the modal -->
+                                 <button class="btn">Close</button>
+                                 <button (click)="deleteProduct(product)" class="btn btn-error">Delete</button>
+                              </form>
+                           </div>
+                        </div>
+                     </dialog>
+                  </div>
+               </tr>
+            }
+         <tr>
+            @for (num of [].constructor(7); track num) {
+               <td></td>
+            }
+            <div class="flex justify-end p-4 space-x-4">
+               <button class="btn btn-neutral"
+                       (click)="showAllProducts(true)">
+                  Show All Products
+               </button>
+               <button class="btn " [ngClass]="addProductState ? 'btn-soft' :'btn-success' "
+                       (click)="addProductState = !addProductState">
+                  Add Product
+               </button>
+            </div>
+         </tr>
+         </tbody>
+      </table>
+
+   }
+
+   @if (addProductState) {
+      <app-add-product (addProductEvent)="addProduct($event)"></app-add-product>
+   }
+</div>
