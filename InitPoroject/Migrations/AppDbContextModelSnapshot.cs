@@ -17,6 +17,32 @@ namespace InitPoroject.Migrations
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "8.0.13");
 
+            modelBuilder.Entity("InitPoroject.Domain.Entity.Client", b =>
+                {
+                    b.Property<string>("CIN")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Adresse")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Nom")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Prenom")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Telephone")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("CIN");
+
+                    b.ToTable("Clients");
+                });
+
             modelBuilder.Entity("InitPoroject.Domain.Entity.Product", b =>
                 {
                     b.Property<int>("Id")
@@ -49,6 +75,61 @@ namespace InitPoroject.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Products");
+                });
+
+            modelBuilder.Entity("InitPoroject.Domain.Entity.Voiture", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("Annee")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("ClientCIN")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Couleur")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Immatriculation")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Marque")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Modele")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ClientCIN");
+
+                    b.ToTable("Voitures");
+                });
+
+            modelBuilder.Entity("InitPoroject.Domain.Entity.Voiture", b =>
+                {
+                    b.HasOne("InitPoroject.Domain.Entity.Client", "Client")
+                        .WithMany("Voitures")
+                        .HasForeignKey("ClientCIN")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Client");
+                });
+
+            modelBuilder.Entity("InitPoroject.Domain.Entity.Client", b =>
+                {
+                    b.Navigation("Voitures");
                 });
 #pragma warning restore 612, 618
         }

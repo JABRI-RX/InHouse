@@ -1,2 +1,12 @@
 @import "tailwindcss";
 @plugin "daisyui";
+
+.rowT{
+   opacity: 1;
+   animation: rowFadeIn;
+   animation-duration: 2s;
+}
+@keyframes rowFadeIn {
+   0%{opacity: 0}
+   100%{opacity: 1}
+}

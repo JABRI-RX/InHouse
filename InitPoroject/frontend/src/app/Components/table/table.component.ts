@@ -53,7 +53,8 @@ export class TableComponent implements OnInit {
       this.productService.getAllProducts({})
          .subscribe({
             next: (value) => {
-               this.products = value.slice(0, showAll ? value.length : 3);
+               this.maxNumberOfRows++;
+               this.products = value.slice(0, this.maxNumberOfRows);
                console.log(showAll);
                this.state.set({
                   text: "",

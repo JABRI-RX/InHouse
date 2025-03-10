@@ -1,0 +1,17 @@
+<div class="card">
+   <p-menubar [model]="items">
+      <ng-template #start>
+        <p class="font-bold bg-[#282c34] py-2 px-4 text-white">HOME</p>
+      </ng-template>
+      <ng-template #item let-item let-root="root">
+         <a pRipple class="flex items-center p-menubar-item-link" [routerLink]="[item.routerLink]">
+            <span [class]="item.icon"></span>
+            <span>{{ item.label }}</span>
+         </a>
+      </ng-template>
+      <ng-template #end>
+         <p-button label="ToggleMode" severity="contrast" (click)="ToggleDarkMode()"/>
+      </ng-template>
+   </p-menubar>
+
+</div>

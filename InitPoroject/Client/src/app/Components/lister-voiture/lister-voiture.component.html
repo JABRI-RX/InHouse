@@ -1,0 +1,35 @@
+<div class="overflow-x-auto mt-3 p-6">
+   <p-table [value]="voitures" [tableStyle]="{ 'min-width': '50rem' }">
+      <ng-template #header class="bg-[#272c34]! text-white! ">
+         <tr class=" ">
+            <th class="bg-[#272c34]! text-white! "></th>
+            <th class="bg-[#272c34]! text-white! w-[10%]">Immatriculation</th>
+
+            <th class="bg-[#272c34]! text-white! ">Marque</th>
+            <th class="bg-[#272c34]! text-white! ">Modele</th>
+            <th class="bg-[#272c34]! text-white! ">Annee</th>
+            <th class="bg-[#272c34]! text-white! ">Couleur</th>
+            <th class="bg-[#272c34]! text-white! ">Client CIN</th>
+            <th class="bg-[#272c34]! text-white! ">Actions</th>
+         </tr>
+      </ng-template>
+
+      <ng-template #body let-voiture>
+         <tr>
+            <td class=""></td>
+            <td>{{ voiture.immatriculation }}</td>
+            <td>{{ voiture.marque }}</td>
+            <td>{{ voiture.modele }}</td>
+            <td>{{ voiture.annee }}</td>
+            <td>{{ voiture.couleur }}</td>
+            <td>{{ voiture.clientCIN }}</td>
+            <div class="space-x-2">
+               <app-modifier-voiture-modal />
+               <app-consulter-voiture-modal [voiture]="voiture"  />
+               <app-supprimer-voiture-modal (deleteVoitureEvent)="deleteVoiture($event)" [voiture]="voiture"/>
+
+            </div>
+         </tr>
+      </ng-template>
+   </p-table>
+</div>

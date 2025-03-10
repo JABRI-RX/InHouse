@@ -1,0 +1,13 @@
+<p-button (click)="showDialog()" label="Supprimer" severity="danger"/>
+<p-dialog header="Edit Profile" [modal]="true" [(visible)]="visible" [style]="{ width: '35rem' }">
+   <span class="p-text-secondary block mb-8">Supprimer La Voiture du  immatriculation : {{ voiture?.immatriculation }}
+      ?  </span>
+   <div class="flex justify-end gap-2">
+      <p-button label="Annuler" severity="contrast" (click)="visible = false"/>
+      <div class="z-10">
+
+         <p-toast position="bottom-center" />
+      </div>
+      <p-button label="Supprimer" severity="danger" (click)="deleteVoiture(voiture?.immatriculation)"/>
+   </div>
+</p-dialog>

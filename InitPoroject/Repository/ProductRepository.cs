@@ -20,7 +20,7 @@ public class ProductRepository : IProductRepository
     }
 
 
-    public async Task<IList<Product>> GetAllProductsAsync(QueryObject queryObject)
+    public async Task<IList<Product>> GetAllProductsAsync(QueryObjectProuct queryObject)
     {
         var products = _context.Products.AsQueryable();
         if (queryObject is null)

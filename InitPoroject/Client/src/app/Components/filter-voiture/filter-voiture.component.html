@@ -1,0 +1,49 @@
+<div class="m-8 card bg-base-100 shadow-xl p-4">
+   <p class="text-xl font-black">Filter Voitures Not Implmented</p>
+
+   <p-divider />
+   <form [formGroup]="filterVoitureForm">
+      <div class="flex flex-wrap gap-4 mb-6">
+         <div class="flex-auto">
+            <label class="  block mb-2"> Marque </label>
+            <p-select [options]="marques"   [(ngModel)]="selectedMarque" [ngModelOptions]="{standalone: true}"
+                      optionLabel="name" placeholder="Choisir Marque"
+                      class="w-full "/>
+
+         </div>
+         <div class="flex-auto">
+            <label class="  block mb-2"> Couleur </label>
+            <p-select [options]="couleurs"  [(ngModel)]="selectedCouleurs" [ngModelOptions]="{standalone: true}"
+                      optionLabel="name" placeholder="Choisir Marque"
+                      class="w-full "/>
+
+         </div>
+         <div class="flex-auto">
+            <label class="  block mb-2"> Annee </label>
+            <p-select [options]="annees"   [(ngModel)]="selectedAnnee" [ngModelOptions]="{standalone: true}"
+                      optionLabel="name" placeholder="Choisir Marque"
+                      class="w-full "/>
+
+         </div>
+      </div>
+      <div class="flex flex-wrap gap-4">
+         <div class="flex-auto">
+            <label   class="  block mb-2"> Immatriculation </label>
+            <input pInputText   formControlName="immatriculation" class="w-full" />
+         </div>
+         <div class="flex-auto">
+            <label   class="  block mb-2"> Modele  </label>
+            <input pInputText   formControlName="modele" class="w-full" />
+         </div>
+         <div class="flex-auto">
+            <label  class="  block mb-2">  Client CIN  </label>
+            <input pInputText   formControlName="clientCIN" class="w-full" />
+         </div>
+      </div>
+      <div class="flex justify-center lg:justify-end mt-2 space-x-3">
+         <p-button label="Rréinitialiser" severity="secondary" icon="pi pi-trash" (click)="resetFilter()"/>
+         <p-button label="Filtre" icon="pi pi-filter-fill" (click)="filterVoiture()"/>
+      </div>
+   </form>
+
+</div>

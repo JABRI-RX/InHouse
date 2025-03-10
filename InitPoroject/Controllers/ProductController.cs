@@ -1,4 +1,5 @@
 using InitPoroject.Dto;
+using InitPoroject.Dto.product;
 using InitPoroject.Helpers;
 using InitPoroject.Interface;
 using InitPoroject.Mappers;
@@ -17,7 +18,7 @@ public class ProductController : ControllerBase
     }
 
     [HttpGet]
-    public async Task<IActionResult> GetAllProduct([FromQuery] QueryObject queryObject)
+    public async Task<IActionResult> GetAllProduct([FromQuery] QueryObjectProuct queryObject)
     {
         await Task.Delay(500);
         var products = await _productRepository.GetAllProductsAsync(queryObject); 

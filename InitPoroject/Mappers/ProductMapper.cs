@@ -1,5 +1,6 @@
 using InitPoroject.Domain.Entity;
 using InitPoroject.Dto;
+using InitPoroject.Dto.product;
 
 namespace InitPoroject.Mappers;
 

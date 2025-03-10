@@ -1,6 +1,6 @@
 namespace InitPoroject.Helpers;
 
-public class QueryObject
+public class QueryObjectProuct
 {
     public string? Name;
     public string? Category;

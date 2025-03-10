@@ -1,0 +1,31 @@
+<p-button (click)="showDialog()" label="Consulter" severity="contrast"/>
+<p-dialog header="Consulter Une Voiture" [modal]="true" [(visible)]="visible" [style]="{ width: '35rem' }">
+   <p-card header="Les informations du Voiture"   class="max-w-md mx-auto my-6 shadow-lg rounded-lg">
+      <div class="space-y-4">
+         <div class="flex justify-between">
+            <span class="font-semibold">Immatriculation:</span>
+            <span>{{ voiture?.immatriculation }}</span>
+         </div>
+         <div class="flex justify-between">
+            <span class="font-semibold">Marque:</span>
+            <span>{{ voiture?.marque }}</span>
+         </div>
+         <div class="flex justify-between">
+            <span class="font-semibold">Modèle:</span>
+            <span>{{ voiture?.modele }}</span>
+         </div>
+         <div class="flex justify-between">
+            <span class="font-semibold">Année:</span>
+            <span>{{ voiture?.annee }}</span>
+         </div>
+         <div class="flex justify-between">
+            <span class="font-semibold">Couleur:</span>
+            <span>{{ voiture?.couleur }}</span>
+         </div>
+         <div class="flex justify-between">
+            <span class="font-semibold">Client CIN:</span>
+            <span>{{ voiture?.clientCIN }}</span>
+         </div>
+      </div>
+   </p-card>
+</p-dialog>
