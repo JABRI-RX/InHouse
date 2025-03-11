@@ -1,23 +1,23 @@
 <div *ngIf="showForm" class="m-8 card bg-base-100 shadow-xl p-4">
    <p class="text-xl font-black">Ajouter Une Voiture</p>
    <p-divider/>
-   <form  [formGroup]="addVoitureForm">
+   <form [formGroup]="addVoitureForm">
       <div class="flex flex-wrap gap-4 mb-6">
          <div class="flex-auto">
             <label class="  block mb-2"> Annee </label>
-            <p-select [options]="years" [(ngModel)]="selectedYear" [ngModelOptions]="{standalone: true}"
+            <p-select [options]="years" formControlName="annee"
                       optionLabel="name" placeholder="Choisir Annee"
                       class="w-full "/>
          </div>
          <div class="flex-auto">
             <label class="  block mb-2"> Couleur </label>
-            <p-select [options]="colors" [(ngModel)]="selectedColor" [ngModelOptions]="{standalone: true}"
+            <p-select [options]="colors" formControlName="couleur"
                       optionLabel="name" placeholder="Choisir Couleur"
                       class="w-full "/>
          </div>
          <div class="flex-auto">
             <label class="  block mb-2"> Marque </label>
-            <p-select [options]="marques" [(ngModel)]="selectedMarque" [ngModelOptions]="{standalone: true}"
+            <p-select [options]="marques" formControlName="marque"
                       optionLabel="name" placeholder="Choisir Marque"
                       class="w-full "/>
 
@@ -27,41 +27,45 @@
       <div class="flex flex-wrap gap-4 mb-6">
          <div class="flex-auto">
             <label class="  block mb-2"> Immatriculation </label>
-            <input pInputText formControlName="immatriculation"  class="w-full"/>
-<!--            <textarea rows="5" cols="30" pTextarea formControlName="immatriculation"></textarea>-->
+            <input pInputText formControlName="immatriculation" class="w-full"/>
             <p *ngIf="immatriculation?.hasError('required') && immatriculation?.touched" class="text-red-500">
                Immatriculation Obligatoir</p>
          </div>
 
          <div class="flex-auto">
             <label class="  block mb-2"> Modele </label>
-            <input pInputText formControlName="modele"  class="w-full"/>
+            <input pInputText formControlName="modele" class="w-full"/>
             <p *ngIf="modele?.hasError('required') && modele?.touched" class="text-red-500">Modele Obligatoir</p>
          </div>
          <div class="flex-auto">
             <label class="  block mb-2"> Client CIN </label>
-            <input pInputText formControlName="clientCIN"   pKeyFilter="alphanum" class="w-full"/>
-            <p *ngIf="clientCIN?.hasError('required') && clientCIN?.touched" class="text-red-500">Client CIN Obligatoir</p>
+            <input pInputText formControlName="clientCIN" pKeyFilter="alphanum" class="w-full"/>
+            <p *ngIf="clientCIN?.hasError('required') && clientCIN?.touched" class="text-red-500">Client CIN
+               Obligatoir</p>
 
          </div>
       </div>
       <div class="flex flex-wrap gap-2 mb-6">
          <div class="flex-auto">
-            <label class="  block mb-2"> Accessories  </label>
-            <p-multiselect [options]="accessories" (onChange)="checkAccessories()" [(ngModel)]="selectedAccessories" [ngModelOptions]="{standalone: true}" optionLabel="name" placeholder="Choisir Accessories" [maxSelectedLabels]="3" styleClass="w-full  " />
-            <p *ngIf="accessoriesEmpty" class="text-red-500">Choisir Au Mois Un Accessoire</p>
+            <label class="  block mb-2"> Accessories </label>
+            <p-multiselect [options]="accessoriesList"  formControlName="accessories"
+                           optionLabel="name" placeholder="Choisir Accessories" [maxSelectedLabels]="3"
+                           styleClass="w-full  "/>
+            <p *ngIf="accessories?.invalid && accessories?.touched" class="text-red-500">Choisir Au Mois Un Accessoire</p>
          </div>
 
          <div class="flex-auto">
-            <label class="  block mb-2"> Transmission  </label>
-            <p-multiselect [options]="transmission" (onChange)="checkTransmission()" [(ngModel)]="selectedTransmission" [ngModelOptions]="{standalone: true}" optionLabel="name" placeholder="Choisir Transmissions " [maxSelectedLabels]="3" styleClass="w-full " />
-            <p *ngIf="transmissionsEmpty" class="text-red-500">Choisir Au Mois Un Accessoire</p>
+            <label class="  block mb-2"> Transmission </label>
+            <p-multiselect [options]="transmissionList"  formControlName="transmissions"
+                           optionLabel="name" placeholder="Choisir Transmissions " [maxSelectedLabels]="3"
+                           styleClass="w-full "/>
+            <p *ngIf="transmissions?.invalid && transmissions?.touched" class="text-red-500">Choisir Au Mois Un Accessoire</p>
 
          </div>
 
       </div>
       <div class="flex justify-center lg:justify-end mt-2">
-         <p-button label="Souvegarder" icon="pi pi-plus" (click)="addVoiture()" />
+         <p-button label="Souvegarder" icon="pi pi-plus" (click)="addVoiture()" [disabled]="false"/>
 
       </div>
    </form>

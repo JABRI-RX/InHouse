@@ -1,4 +1,4 @@
-<p-button (click)="showDialog()" label="Consulter" severity="contrast"/>
+<p-button (click)="showDialog()" icon="pi pi-eye" ariaLabel="Consulter" severity="contrast"/>
 <p-dialog header="Consulter Une Voiture" [modal]="true" [(visible)]="visible" [style]="{ width: '35rem' }">
    <p-card header="Les informations du Voiture"   class="max-w-md mx-auto my-6 shadow-lg rounded-lg">
       <div class="space-y-4">
@@ -21,6 +21,14 @@
          <div class="flex justify-between">
             <span class="font-semibold">Couleur:</span>
             <span>{{ voiture?.couleur }}</span>
+         </div>
+         <div class="flex justify-between">
+            <span class="font-semibold">Accessories:</span>
+            <span>{{ voiture?.accessories }}</span>
+         </div>
+         <div class="flex justify-between">
+            <span class="font-semibold">Transmission:</span>
+            <span>{{ voiture?.transmission }}</span>
          </div>
          <div class="flex justify-between">
             <span class="font-semibold">Client CIN:</span>

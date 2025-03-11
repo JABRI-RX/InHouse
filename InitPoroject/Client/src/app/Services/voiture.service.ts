@@ -19,7 +19,6 @@ export class VoitureService {
       let query = "";
       if(filterVoitures !== undefined)
          query  = formatFilterQueryVoiture(filterVoitures);
-      console.log(filterVoitures);
       return this.httpClient.get<ReadVoitureDto[]>(apiurl + "voitures?"+query);
    }
 

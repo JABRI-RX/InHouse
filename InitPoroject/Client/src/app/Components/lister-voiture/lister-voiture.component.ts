@@ -6,6 +6,7 @@ import { ConsulterVoitureModalComponent} from '../consulter-modal/consulter-voit
 import {ModifierVoitureModalComponent} from '../modifier-modal/modifier-voiture-modal.component';
 import {SupprimerVoitureModalComponent} from '../supprimer-modal/supprimer-modal.component';
 import {AjouterVoitureComponent} from '../ajouter-voiture/ajouter-voiture.component';
+import {ProgressSpinner} from 'primeng/progressspinner';
 
 @Component({
   selector: 'app-lister-voiture',
@@ -15,6 +16,7 @@ import {AjouterVoitureComponent} from '../ajouter-voiture/ajouter-voiture.compon
       SupprimerVoitureModalComponent,
       ConsulterVoitureModalComponent,
       AjouterVoitureComponent,
+      ProgressSpinner,
 
    ],
   templateUrl: './lister-voiture.component.html',
@@ -23,6 +25,7 @@ import {AjouterVoitureComponent} from '../ajouter-voiture/ajouter-voiture.compon
 export class ListerVoitureComponent implements OnInit{
    @Input() voitures: ReadVoitureDto[]  = [];
    @Output() deleteVoitureEvent = new EventEmitter<string>();
+   @Input() loadingTable: boolean = false;
    ngOnInit(): void {
 
    }

@@ -1,38 +1,55 @@
-<div class="overflow-x-auto mt-3 p-6">
-   <p-table [value]="voitures" [tableStyle]="{ 'min-width': '50rem' ,'background-color':'red'}">
-      <ng-template #header class="bg-[#272c34]! text-white! text-lg">
-         <tr class=" ">
-            <th class="bg-[#272c34]! text-white! "></th>
-            <th class="bg-[#272c34]! text-white! w-[10%]">Immatriculation</th>
-            <th class="bg-[#272c34]! text-white! ">Marque</th>
-            <th class="bg-[#272c34]! text-white! ">Modele</th>
-            <th class="bg-[#272c34]! text-white! ">Annee</th>
-            <th class="bg-[#272c34]! text-white! ">Couleur</th>
-            <th class="bg-[#272c34]! text-white! ">Accessories</th>
-            <th class="bg-[#272c34]! text-white! ">Transmission</th>
-            <th class="bg-[#272c34]! text-white! ">Client CIN</th>
-            <th class="bg-[#272c34]! text-white! ">Actions</th>
-         </tr>
-      </ng-template>
+@if (loadingTable) {
+   <div class="card flex justify-center">
+      <p-progress-spinner strokeWidth="8" fill="transparent" animationDuration=".5s"
+                          [style]="{ width: '50px', height: '50px' }"/>
+   </div>
+} @else {
+   <div class="overflow-x-auto mt-3 p-6">
+      <p-table [value]="voitures" [tableStyle]="{ 'min-width': '50rem' }" class="text-base!">
+         <ng-template #header class="bg-[#272c34]! text-white! text-lg">
+            <tr class="">
+               <th class="bg-[#272c34]! text-white! text-left align-top"></th>
+               <th class="bg-[#272c34]! text-white! text-left align-top w-[1%]!">Immatriculation</th>
+               <th class="bg-[#272c34]! text-white! text-left align-top">Marque</th>
+               <th class="bg-[#272c34]! text-white! text-left align-top">Modele</th>
+               <th class="bg-[#272c34]! text-white! text-left align-top">Annee</th>
+               <th class="bg-[#272c34]! text-white! text-left align-top">Couleur</th>
+               <th class="bg-[#272c34]! text-white! text-left align-top">Accessories</th>
+               <th class="bg-[#272c34]! text-white! text-left align-top">Transmission</th>
+               <th class="bg-[#272c34]! text-white! text-left align-top">Client CIN</th>
+               <th class="bg-[#272c34]! text-white! text-left align-top">Actions</th>
+            </tr>
+         </ng-template>
 
-      <ng-template #body let-voiture>
-         <tr>
-            <td class=""></td>
-            <td>{{ voiture.immatriculation }}</td>
-            <td>{{ voiture.marque }}</td>
-            <td>{{ voiture.modele }}</td>
-            <td>{{ voiture.annee }}</td>
-            <td>{{ voiture.couleur }}</td>
-            <td>{{ voiture.accessories }}</td>
-            <td>{{ voiture.transmission }}</td>
-            <td>{{ voiture.clientCIN }}</td>
-            <div class="space-x-2">
-               <app-modifier-voiture-modal />
-               <app-consulter-voiture-modal [voiture]="voiture"  />
-               <app-supprimer-voiture-modal (deleteVoitureEvent)="deleteVoiture($event)" [voiture]="voiture"/>
-
-            </div>
-         </tr>
-      </ng-template>
-   </p-table>
-</div>
+         <ng-template #body let-voiture>
+            <tr class="fadeIn">
+               <td class="text-left align-top"></td>
+               <td class="text-left align-top">{{ voiture.immatriculation }}</td>
+               <td class="text-left align-top">{{ voiture.marque }}</td>
+               <td class="text-left align-top">{{ voiture.modele }}</td>
+               <td class="text-left align-top">{{ voiture.annee }}</td>
+               <td class="text-left align-top">{{ voiture.couleur }}</td>
+               <td class="text-left align-top">
+                  @for (acc of voiture.accessories; track acc) {
+                     <span>{{ acc }}</span><br>
+                  }
+               </td>
+               <td class="text-left align-top">
+                  @for (trans of voiture.transmission; track trans) {
+                     <span>{{ trans }}</span><br>
+                  }
+               </td>
+               <!--            <td class="text-left align-top">{{ voiture.transmission }}</td>-->
+               <td class="text-left align-top">{{ voiture.clientCIN }}</td>
+               <td class="text-left align-top">
+                  <div class="space-x-2 ">
+                     <app-modifier-voiture-modal [voiture]="voiture"/>
+                     <app-consulter-voiture-modal [voiture]="voiture"/>
+                     <app-supprimer-voiture-modal (deleteVoitureEvent)="deleteVoiture($event)" [voiture]="voiture"/>
+                  </div>
+               </td>
+            </tr>
+         </ng-template>
+      </p-table>
+   </div>
+}

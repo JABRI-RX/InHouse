@@ -1,5 +1,5 @@
-<p-button (click)="showDialog()" label="Supprimer" severity="danger"/>
-<p-dialog header="Edit Profile" [modal]="true" [(visible)]="visible" [style]="{ width: '35rem' }">
+<p-button (click)="showDialog()" icon="pi pi-trash" ariaLabel="Supprimer" severity="danger" />
+<p-dialog header="Suppresion D'une Voiture" [modal]="true" [(visible)]="visible" [style]="{ width: '35rem' }">
    <span class="p-text-secondary block mb-8">Supprimer La Voiture du  immatriculation : {{ voiture?.immatriculation }}
       ?  </span>
    <div class="flex justify-end gap-2">

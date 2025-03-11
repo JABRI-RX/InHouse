@@ -1,16 +1,48 @@
-<p-button (click)="showDialog()" label="Modifier" severity="warn"></p-button>
-<p-dialog header="Edit Profile" [modal]="true" [(visible)]="visible" [style]="{ width: '25rem' }">
-   <span class="p-text-secondary block mb-8">Update your information.</span>
-   <div class="flex items-center gap-4 mb-4">
-      <label for="username" class="font-semibold w-24">Username</label>
-      <input pInputText id="username" class="flex-auto" autocomplete="off"/>
-   </div>
-   <div class="flex items-center gap-4 mb-8">
-      <label for="email" class="font-semibold w-24">Email</label>
-      <input pInputText id="email" class="flex-auto" autocomplete="off"/>
-   </div>
-   <div class="flex justify-end gap-2">
-      <p-button label="Cancel" severity="secondary" (click)="visible = false"/>
-      <p-button label="Save" (click)="visible = false"/>
-   </div>
+<p-button (click)="showDialog()" icon="pi pi-pen-to-square" ariaLabel="Modifier" severity="warn"></p-button>
+<p-dialog header="Modification  D'une Voiture" [modal]="true" [(visible)]="visible" [style]="{ width: '25rem' }">
+   <span class="p-text-secondary block mb-8">Modifier la Voiture. {{voiture?.immatriculation}}</span>
+   <form [formGroup]="editVoitureForm">
+      <div class="flex flex-wrap gap-4 mb-6">
+         <div class="flex-auto">
+            <label class="  block mb-2"> Annee </label>
+            <p-select [options]="yearsList" formControlName="annee"
+                      optionLabel="name" placeholder="Choisir Annee"
+                      class="w-full "/>
+         </div>
+         <div class="flex-auto">
+            <label class="  block mb-2"> Couleur </label>
+            <p-select [options]="colorsList" formControlName="couleur"
+                      optionLabel="name" placeholder="Choisir Couleur"
+                      class="w-full "/>
+         </div>
+         <div class="flex-auto w-[100%]">
+            <label class="  block mb-2"> Modele </label>
+            <input pInputText formControlName="modele" class="w-full"/>
+            <p *ngIf="modele?.hasError('required') && modele?.touched" class="text-red-500">Modele Obligatoir</p>
+         </div>
+         <div class="flex-auto w-[100%]">
+            <label class="  block mb-2"> Marque </label>
+            <p-select [options]="marquesList" formControlName="marque"
+                      optionLabel="name" placeholder="Choisir Couleur"
+                      class="w-full "/>
+         </div>
+         <div class="flex-auto">
+            <label class="  block mb-2"> Client CIN </label>
+            <input pInputText formControlName="clientCIN" pKeyFilter="alphanum" class="w-full"/>
+            <p *ngIf="clientCIN?.hasError('required') && clientCIN?.touched" class="text-red-500">Client CIN
+               Obligatoir</p>
+         </div>
+         <div class="flex-auto">
+            <label class="  block mb-2"> Accessories </label>
+            <input pInputText formControlName="clientCIN" pKeyFilter="alphanum" class="w-full"/>
+            <p *ngIf="clientCIN?.hasError('required') && clientCIN?.touched" class="text-red-500">Client CIN
+               Obligatoir</p>
+         </div>
+      </div>
+      <div class="flex justify-end gap-2">
+         <p-button label="Cancel" severity="contrast" (click)="visible = false"/>
+         <p-button label="Save" (click)="visible = false" severity="warn"/>
+      </div>
+   </form>
+
 </p-dialog>

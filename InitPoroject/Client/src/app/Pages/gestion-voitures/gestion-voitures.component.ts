@@ -33,6 +33,7 @@ export class GestionVoituresComponent implements OnInit{
    voitures :ReadVoitureDto[] = [];
    filterVoituresQuery:FilterVoitureDto| undefined;
    showForm:boolean = true;
+   loadingTable: boolean = false;
    constructor(private voitureService:VoitureService,
                private messageService : MessageService) {
    }
@@ -50,6 +51,7 @@ export class GestionVoituresComponent implements OnInit{
       this.voitureService.addVoiture(voiture).subscribe({
          next:(value)=>{
             this.populateVoiture(false);
+            this.messageService.add({ severity: 'success', summary: 'Stat', detail: "Voiture Cree", life: 3000 });
          },
          error:(error:HttpErrorResponse)=>{
             this.messageService.add({ severity: 'error', summary: 'Stat', detail: error.error.message, life: 3000 });
@@ -73,11 +75,12 @@ export class GestionVoituresComponent implements OnInit{
          })
    }
    populateVoiture(filterSearchState:boolean){
+      this.loadingTable = true;
       this.voitureService.getAllVoitures(filterSearchState ? this.filterVoituresQuery: undefined )
          .subscribe({
             next:(value)=>{
                this.voitures = value;
-
+               this.loadingTable = false;
             },
             error:(error)=>{
                console.log("To Be Implmented")
