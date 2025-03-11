@@ -46,6 +46,7 @@ export class GestionVoituresComponent implements OnInit{
       this.filterVoituresQuery = {}
    }
    ajouterVoiture(voiture:CreateVoitureDto){
+      console.log(voiture);
       this.voitureService.addVoiture(voiture).subscribe({
          next:(value)=>{
             this.populateVoiture(false);

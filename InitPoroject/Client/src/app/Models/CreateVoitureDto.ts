@@ -4,5 +4,7 @@ export interface CreateVoitureDto {
    annee: number;
    couleur: string;
    immatriculation: string;
+   accessories:string[]
+   transmission:string[]
    clientCIN: string;
 }

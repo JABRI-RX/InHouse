@@ -121,225 +121,269 @@ public static class PrepData
     }
 
     private static void SeedClient(AppDbContext context)
-    {
-        if (context.Clients.Any())
-            return;
+{
+    if (context.Clients.Any())
+        return;
 
-        context.Clients.AddRange(
-            new Client
+    // Possible accessories and transmission types
+    var possibleAccessories = new List<string>
+    {
+        "Air Conditioning",
+        "Sunroof",
+        "Heated Seats",
+        "Navigation System",
+        "Bluetooth",
+        "Parking Sensors",
+        "Rearview Camera",
+        "Leather Seats",
+        "Keyless Entry",
+        "Wireless Charging"
+    };
+
+    var possibleTransmissions = new List<string>
+    {
+        "Front-Wheel Drive",
+        "Rear-Wheel Drive",
+        "All-Wheel Drive",
+        "4x4"
+    };
+
+    context.Clients.AddRange(
+        new Client
+        {
+            CIN = "A123456",
+            Nom = "El Amrani",
+            Prenom = "Mohamed",
+            Adresse = "12 Rue Mohammed V, Casablanca",
+            Telephone = "0612345678",
+            Voitures = new List<Voiture>
             {
-                CIN = "A123456",
-                Nom = "El Amrani",
-                Prenom = "Mohamed",
-                Adresse = "12 Rue Mohammed V, Casablanca",
-                Telephone = "0612345678",
-                Voitures = new List<Voiture>
+                new Voiture
                 {
-                    new Voiture
-                    {
-                        Id = 1,
-                        Marque = "Renault",
-                        Modele = "Clio",
-                        Couleur = "Noir",
-                        Annee = 2018,
-                        Immatriculation = "A-1234-BC",
-                        ClientCIN = "A123456"
-                    },
-                    new Voiture
-                    {
-                        Id = 2,
-                        Marque = "Peugeot",
-                        Modele = "208",
-                        Couleur = "Blanc",
-                        Annee = 2020,
-                        Immatriculation = "A-5678-DE",
-                        ClientCIN = "A123456"
-                    }
-                }
-            },
-            new Client
-            {
-                CIN = "B654321",
-                Nom = "Bennani",
-                Prenom = "Fatima",
-                Adresse = "45 Avenue Hassan II, Rabat",
-                Telephone = "0623456789",
-                Voitures = new List<Voiture>
+                    Id = 1,
+                    Marque = "Renault",
+                    Modele = "Clio",
+                    Couleur = "Noir",
+                    Annee = 2018,
+                    Immatriculation = "A-1234-BC",
+                    ClientCIN = "A123456",
+                    Transmission = new List<string> { "Front-Wheel Drive" },
+                    Accessories = new List<string> { "Air Conditioning", "Bluetooth", "Parking Sensors" }
+                },
+                new Voiture
                 {
-                    new Voiture
-                    {
-                        Id = 3,
-                        Marque = "Dacia",
-                        Modele = "Sandero",
-                        Couleur = "Blanche",
-                        Annee = 2019,
-                        Immatriculation = "B-9101-FG",
-                        ClientCIN = "B654321"
-                    },
-                    new Voiture
-                    {
-                        Id = 4,
-                        Marque = "Hyundai",
-                        Modele = "i20",
-                        Couleur = "Noir",
-                        Annee = 2021,
-                        Immatriculation = "B-1121-HI",
-                        ClientCIN = "B654321"
-                    }
-                }
-            },
-            new Client
-            {
-                CIN = "C987654",
-                Nom = "Cherkaoui",
-                Prenom = "Karim",
-                Adresse = "8 Boulevard Mohammed VI, Marrakech",
-                Telephone = "0634567890",
-                Voitures = new List<Voiture>
-                {
-                    new Voiture
-                    {
-                        Id = 5,
-                        Marque = "Toyota",
-                        Modele = "Corolla",
-                        Couleur = "Rouge",
-                        Annee = 2022,
-                        Immatriculation = "C-3141-JK",
-                        ClientCIN = "C987654"
-                    },
-                    new Voiture
-                    {
-                        Id = 6,
-                        Marque = "Renault",
-                        Modele = "Megane",
-                        Couleur = "Gris",
-                        Annee = 2020,
-                        Immatriculation = "C-4151-LM",
-                        ClientCIN = "C987654"
-                    }
-                }
-            },
-            new Client
-            {
-                CIN = "D123789",
-                Nom = "Rhouzlane",
-                Prenom = "Amina",
-                Adresse = "22 Rue Ibn Battuta, Tanger",
-                Telephone = "0645678901",
-                Voitures = new List<Voiture>
-                {
-                    new Voiture
-                    {
-                        Id = 7,
-                        Marque = "Peugeot",
-                        Modele = "3008",
-                        Couleur = "Bleu",
-                        Annee = 2021,
-                        Immatriculation = "D-5161-NO",
-                        ClientCIN = "D123789"
-                    },
-                    new Voiture
-                    {
-                        Id = 8,
-                        Marque = "Citroën",
-                        Modele = "C4",
-                        Couleur = "Noir",
-                        Annee = 2019,
-                        Immatriculation = "D-6171-PQ",
-                        ClientCIN = "D123789"
-                    }
-                }
-            },
-            new Client
-            {
-                CIN = "E456123",
-                Nom = "Zouhairi",
-                Prenom = "Youssef",
-                Adresse = "10 Rue Al Massira, Fès",
-                Telephone = "0656789012",
-                Voitures = new List<Voiture>
-                {
-                    new Voiture
-                    {
-                        Id = 9,
-                        Marque = "Ford",
-                        Modele = "Focus",
-                        Couleur = "Vert",
-                        Annee = 2020,
-                        Immatriculation = "E-7181-RS",
-                        ClientCIN = "E456123"
-                    },
-                    new Voiture
-                    {
-                        Id = 10,
-                        Marque = "Kia",
-                        Modele = "Sportage",
-                        Couleur = "Blanc",
-                        Annee = 2022,
-                        Immatriculation = "E-8191-TU",
-                        ClientCIN = "E456123"
-                    }
+                    Id = 2,
+                    Marque = "Peugeot",
+                    Modele = "208",
+                    Couleur = "Blanc",
+                    Annee = 2020,
+                    Immatriculation = "A-5678-DE",
+                    ClientCIN = "A123456",
+                    Transmission = new List<string> { "Rear-Wheel Drive", "All-Wheel Drive" },
+                    Accessories = new List<string> { "Sunroof", "Heated Seats", "Navigation System", "Rearview Camera" }
                 }
             }
-        );
-    }
-
-    private static void SeedVoitures(AppDbContext context)
-    {
-        if (context.Voitures.Any())
-            return;
-
-        context.Voitures.AddRange(
-            new Voiture
+        },
+        new Client
+        {
+            CIN = "B654321",
+            Nom = "Bennani",
+            Prenom = "Fatima",
+            Adresse = "45 Avenue Hassan II, Rabat",
+            Telephone = "0623456789",
+            Voitures = new List<Voiture>
             {
-                Id = 1,
-                Marque = "Renault",
-                Modele = "Clio",
-                Couleur = "Noir",
-                Annee = 2018,
-                Immatriculation = "A-1234-BC",
-                ClientCIN = "A123456",
-            },
-            new Voiture
-            {
-                Id = 2,
-                Marque = "Peugeot",
-                Modele = "208",
-                Annee = 2020,
-                Couleur = "Noir",
-                Immatriculation = "B-5678-DE",
-                ClientCIN = "B654321"
-            },
-            new Voiture
-            {
-                Id = 3,
-                Marque = "Dacia",
-                Modele = "Sandero",
-                Annee = 2019,
-                Couleur = "Blanche",
-                Immatriculation = "C-9101-FG",
-                ClientCIN = "C987654"
-            },
-            new Voiture
-            {
-                Id = 4,
-                Marque = "Hyundai",
-                Modele = "i20",
-                Annee = 2021,
-                Couleur = "Noir",
-                Immatriculation = "D-1121-HI",
-                ClientCIN = "D123789"
-            },
-            new Voiture
-            {
-                Id = 5,
-                Marque = "Toyota",
-                Modele = "Corolla",
-                Annee = 2022,
-                Couleur = "roughe",
-                Immatriculation = "E-3141-JK",
-                ClientCIN = "E456123"
+                new Voiture
+                {
+                    Id = 3,
+                    Marque = "Dacia",
+                    Modele = "Sandero",
+                    Couleur = "Blanche",
+                    Annee = 2019,
+                    Immatriculation = "B-9101-FG",
+                    ClientCIN = "B654321",
+                    Transmission = new List<string> { "All-Wheel Drive" },
+                    Accessories = new List<string> { "Keyless Entry", "Wireless Charging", "Leather Seats" }
+                },
+                new Voiture
+                {
+                    Id = 4,
+                    Marque = "Hyundai",
+                    Modele = "i20",
+                    Couleur = "Noir",
+                    Annee = 2021,
+                    Immatriculation = "B-1121-HI",
+                    ClientCIN = "B654321",
+                    Transmission = new List<string> { "Front-Wheel Drive", "4x4" },
+                    Accessories = new List<string> { "Air Conditioning", "Bluetooth", "Parking Sensors" }
+                }
             }
-        );
-    }
+        },
+        new Client
+        {
+            CIN = "C987654",
+            Nom = "Cherkaoui",
+            Prenom = "Karim",
+            Adresse = "8 Boulevard Mohammed VI, Marrakech",
+            Telephone = "0634567890",
+            Voitures = new List<Voiture>
+            {
+                new Voiture
+                {
+                    Id = 5,
+                    Marque = "Toyota",
+                    Modele = "Corolla",
+                    Couleur = "Rouge",
+                    Annee = 2022,
+                    Immatriculation = "C-3141-JK",
+                    ClientCIN = "C987654",
+                    Transmission = new List<string> { "Front-Wheel Drive" },
+                    Accessories = new List<string> { "Air Conditioning", "Sunroof", "Heated Seats" }
+                },
+                new Voiture
+                {
+                    Id = 6,
+                    Marque = "Renault",
+                    Modele = "Megane",
+                    Couleur = "Gris",
+                    Annee = 2020,
+                    Immatriculation = "C-4151-LM",
+                    ClientCIN = "C987654",
+                    Transmission = new List<string> { "Rear-Wheel Drive", "All-Wheel Drive" },
+                    Accessories = new List<string> { "Navigation System", "Bluetooth", "Parking Sensors", "Rearview Camera" }
+                }
+            }
+        },
+        new Client
+        {
+            CIN = "D123789",
+            Nom = "Rhouzlane",
+            Prenom = "Amina",
+            Adresse = "22 Rue Ibn Battuta, Tanger",
+            Telephone = "0645678901",
+            Voitures = new List<Voiture>
+            {
+                new Voiture
+                {
+                    Id = 7,
+                    Marque = "Peugeot",
+                    Modele = "3008",
+                    Couleur = "Bleu",
+                    Annee = 2021,
+                    Immatriculation = "D-5161-NO",
+                    ClientCIN = "D123789",
+                    Transmission = new List<string> { "All-Wheel Drive" },
+                    Accessories = new List<string> { "Leather Seats", "Keyless Entry", "Wireless Charging" }
+                },
+                new Voiture
+                {
+                    Id = 8,
+                    Marque = "Citroën",
+                    Modele = "C4",
+                    Couleur = "Noir",
+                    Annee = 2019,
+                    Immatriculation = "D-6171-PQ",
+                    ClientCIN = "D123789",
+                    Transmission = new List<string> { "Front-Wheel Drive", "4x4" },
+                    Accessories = new List<string> { "Air Conditioning", "Bluetooth", "Parking Sensors" }
+                }
+            }
+        },
+        new Client
+        {
+            CIN = "E456123",
+            Nom = "Zouhairi",
+            Prenom = "Youssef",
+            Adresse = "10 Rue Al Massira, Fès",
+            Telephone = "0656789012",
+            Voitures = new List<Voiture>
+            {
+                new Voiture
+                {
+                    Id = 9,
+                    Marque = "Ford",
+                    Modele = "Focus",
+                    Couleur = "Vert",
+                    Annee = 2020,
+                    Immatriculation = "E-7181-RS",
+                    ClientCIN = "E456123",
+                    Transmission = new List<string> { "Front-Wheel Drive" },
+                    Accessories = new List<string> { "Sunroof", "Heated Seats", "Navigation System" }
+                },
+                new Voiture
+                {
+                    Id = 10,
+                    Marque = "Kia",
+                    Modele = "Sportage",
+                    Couleur = "Blanc",
+                    Annee = 2022,
+                    Immatriculation = "E-8191-TU",
+                    ClientCIN = "E456123",
+                    Transmission = new List<string> { "Rear-Wheel Drive", "All-Wheel Drive" },
+                    Accessories = new List<string> { "Air Conditioning", "Bluetooth", "Parking Sensors", "Rearview Camera" }
+                }
+            }
+        }
+    );
+
+}
+
+    // private static void SeedVoitures(AppDbContext context)
+    // {
+    //     if (context.Voitures.Any())
+    //         return;
+    //
+    //     context.Voitures.AddRange(
+    //         new Voiture
+    //         {
+    //             Id = 1,
+    //             Marque = "Renault",
+    //             Modele = "Clio",
+    //             Couleur = "Noir",
+    //             Annee = 2018,
+    //             Immatriculation = "A-1234-BC",
+    //             ClientCIN = "A123456",
+    //         },
+    //         new Voiture
+    //         {
+    //             Id = 2,
+    //             Marque = "Peugeot",
+    //             Modele = "208",
+    //             Annee = 2020,
+    //             Couleur = "Noir",
+    //             Immatriculation = "B-5678-DE",
+    //             ClientCIN = "B654321"
+    //         },
+    //         new Voiture
+    //         {
+    //             Id = 3,
+    //             Marque = "Dacia",
+    //             Modele = "Sandero",
+    //             Annee = 2019,
+    //             Couleur = "Blanche",
+    //             Immatriculation = "C-9101-FG",
+    //             ClientCIN = "C987654"
+    //         },
+    //         new Voiture
+    //         {
+    //             Id = 4,
+    //             Marque = "Hyundai",
+    //             Modele = "i20",
+    //             Annee = 2021,
+    //             Couleur = "Noir",
+    //             Immatriculation = "D-1121-HI",
+    //             ClientCIN = "D123789"
+    //         },
+    //         new Voiture
+    //         {
+    //             Id = 5,
+    //             Marque = "Toyota",
+    //             Modele = "Corolla",
+    //             Annee = 2022,
+    //             Couleur = "roughe",
+    //             Immatriculation = "E-3141-JK",
+    //             ClientCIN = "E456123"
+    //         }
+    //     );
+    // }
 }

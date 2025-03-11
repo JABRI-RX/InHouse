@@ -12,6 +12,9 @@ import {NgIf} from '@angular/common';
 import {SelectOBj} from '../../Helpers/SelectOBj';
 import {commonYears} from '../../Helpers/Annee';
 import {Textarea} from 'primeng/textarea';
+import {MultiSelect} from 'primeng/multiselect';
+import {commonTransmissions} from '../../Helpers/TransmissionData';
+import {commonAccessories} from '../../Helpers/AccessoriesData';
 
 @Component({
    selector: 'app-ajouter-voiture',
@@ -24,7 +27,7 @@ import {Textarea} from 'primeng/textarea';
       Select,
       FormsModule,
       NgIf,
-      Textarea
+      MultiSelect,
    ],
    templateUrl: './ajouter-voiture.component.html',
    styles: ``
@@ -39,6 +42,8 @@ export class AjouterVoitureComponent implements OnInit {
       annee: new FormControl("", [Validators.required]),
       couleur: new FormControl("", [Validators.required]),
       immatriculation: new FormControl("", [Validators.required]),
+      accessories: new FormControl<string[]>([], [Validators.required]),
+      transmission: new FormControl<string[]>([], [Validators.required]),
       clientCIN: new FormControl("", [Validators.required]),
    })
    get modele() {return this.addVoitureForm.get("modele")}
@@ -46,22 +51,29 @@ export class AjouterVoitureComponent implements OnInit {
    get immatriculation() {return this.addVoitureForm.get("immatriculation")}
    get clientCIN() {return this.addVoitureForm.get("clientCIN")}
 
-   colors: SelectOBj[] | undefined;
+   colors: SelectOBj[] = [];
    selectedColor: SelectOBj | undefined;
-   marques: SelectOBj[] | undefined;
+   marques: SelectOBj[] = [];
    selectedMarque: SelectOBj | undefined;
-   years: SelectOBj[] | undefined;
+   years: SelectOBj[] = [];
    selectedYear: SelectOBj | undefined;
    // years
+   accessories: SelectOBj[] = [];
+   selectedAccessories: SelectOBj[]  = [];
+   transmission: SelectOBj[] = [];
+   selectedTransmission: SelectOBj[] = [];
+   accessoriesEmpty: boolean = false;
+   transmissionsEmpty: boolean = false;
 
    ngOnInit() {
       this.colors = commonCarColors;
       this.marques = commonCarBrands;
       this.years = commonYears(50);
+      this.transmission = commonTransmissions;
+      this.accessories = commonAccessories;
    }
 
    addVoiture() {
-
       if( this.selectedColor === undefined || this.selectedMarque === undefined)
       {
          console.log("Populate the selects");
@@ -70,7 +82,9 @@ export class AjouterVoitureComponent implements OnInit {
       this.addVoitureForm.patchValue({
          marque: this.selectedMarque?.code  ??"NOTHING",
          couleur: this.selectedColor?.code ?? "NOTHING",
-         annee: this.selectedYear?.code ?? "0000"
+         annee: this.selectedYear?.code ?? "0000",
+         accessories: this.selectedAccessories?.map(a=>a.code),
+         transmission: this.selectedTransmission.map(a=>a.code)
       })
       if(this.addVoitureForm.invalid )
       {
@@ -78,15 +92,35 @@ export class AjouterVoitureComponent implements OnInit {
          return;
       }
       this.voiture = {
-         immatriculation:this.addVoitureForm.value.immatriculation!,
          annee: Number(this.addVoitureForm.value.annee!),
          couleur:this.addVoitureForm.value.couleur!,
          modele:this.addVoitureForm.value.modele!,
          marque:this.addVoitureForm.value.marque!,
+         immatriculation:this.addVoitureForm.value.immatriculation!,
+         accessories:this.addVoitureForm.value.accessories!,
+         transmission:this.addVoitureForm.value.transmission!,
+
          clientCIN:this.addVoitureForm.value.clientCIN!,
       }
       this.addVoitureEvent.emit(this.voiture)
 
    }
 
+   checkAccessories() {
+      if(this.selectedAccessories?.length ===0)
+      {
+         this.accessoriesEmpty = true;
+         return;
+      }
+      this.accessoriesEmpty = false;
+   }
+
+   checkTransmission() {
+      if(this.selectedTransmission?.length ===0)
+      {
+         this.transmissionsEmpty = true;
+         return;
+      }
+      this.transmissionsEmpty = false;
+   }
 }

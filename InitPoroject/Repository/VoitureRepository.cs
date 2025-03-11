@@ -81,9 +81,11 @@ public class VoitureRepository : IVoitureRepository
             return null;
         voiture.Marque = voitureDto.Marque;
         voiture.Annee = voitureDto.Annee;
-        voiture.ClientCIN = voitureDto.ClientCIN;
-        voiture.Couleur = voitureDto.Couleur;
         voiture.Modele = voitureDto.Modele;
+        voiture.Couleur = voitureDto.Couleur;
+        voiture.ClientCIN = voitureDto.ClientCIN;
+        voiture.Accessories = voitureDto.Accessories;
+        voiture.Transmission = voitureDto.Transmission;
         await _context.SaveChangesAsync();
         return voiture;
     }

@@ -1,14 +1,15 @@
 <div class="overflow-x-auto mt-3 p-6">
-   <p-table [value]="voitures" [tableStyle]="{ 'min-width': '50rem' }">
-      <ng-template #header class="bg-[#272c34]! text-white! ">
+   <p-table [value]="voitures" [tableStyle]="{ 'min-width': '50rem' ,'background-color':'red'}">
+      <ng-template #header class="bg-[#272c34]! text-white! text-lg">
          <tr class=" ">
             <th class="bg-[#272c34]! text-white! "></th>
             <th class="bg-[#272c34]! text-white! w-[10%]">Immatriculation</th>
-
             <th class="bg-[#272c34]! text-white! ">Marque</th>
             <th class="bg-[#272c34]! text-white! ">Modele</th>
             <th class="bg-[#272c34]! text-white! ">Annee</th>
             <th class="bg-[#272c34]! text-white! ">Couleur</th>
+            <th class="bg-[#272c34]! text-white! ">Accessories</th>
+            <th class="bg-[#272c34]! text-white! ">Transmission</th>
             <th class="bg-[#272c34]! text-white! ">Client CIN</th>
             <th class="bg-[#272c34]! text-white! ">Actions</th>
          </tr>
@@ -22,6 +23,8 @@
             <td>{{ voiture.modele }}</td>
             <td>{{ voiture.annee }}</td>
             <td>{{ voiture.couleur }}</td>
+            <td>{{ voiture.accessories }}</td>
+            <td>{{ voiture.transmission }}</td>
             <td>{{ voiture.clientCIN }}</td>
             <div class="space-x-2">
                <app-modifier-voiture-modal />

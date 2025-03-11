@@ -16,6 +16,8 @@ public static class VoitureMapper
             Marque = voiture.Marque,
             Modele = voiture.Modele,
             Couleur = voiture.Couleur,
+            Accessories = voiture.Accessories,
+            Transmission = voiture.Transmission,
             ClientCIN = voiture.ClientCIN
         };
     }
@@ -28,6 +30,8 @@ public static class VoitureMapper
             Marque = voiture.Marque,
             Modele = voiture.Modele,
             Couleur = voiture.Couleur,
+            Accessories = voiture.Accessories,
+            Transmission = voiture.Transmission,
             ClientCIN = voiture.ClientCIN
         };
     }
@@ -35,10 +39,13 @@ public static class VoitureMapper
     {
         return new Voiture
         {
-            Annee = voiture.Annee,
-            Immatriculation = voiture.Immatriculation,
             Marque = voiture.Marque,
             Modele = voiture.Modele,
+            Annee = voiture.Annee,
+            Couleur = voiture.Couleur,
+            Immatriculation = voiture.Immatriculation,
+            Accessories = voiture.Accessories,
+            Transmission = voiture.Transmission,
             ClientCIN = voiture.ClientCIN
         };
     }

@@ -5,5 +5,7 @@ export interface ReadVoitureDto {
    annee: number;
    couleur: string;
    immatriculation: string;
+   accessories:string[]
+   transmission:string[]
    clientCIN: string;
 }

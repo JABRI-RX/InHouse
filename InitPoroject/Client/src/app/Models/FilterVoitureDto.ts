@@ -4,5 +4,7 @@ export interface FilterVoitureDto {
    annee?: string;
    couleur?: string;
    immatriculation?: string;
+   accessories?:string[]
+   transmission?:string[]
    clientCIN?: string;
 }

@@ -13,6 +13,10 @@ public class UpdateVoitureDto
     [Required]
     public string Couleur { get; set; } = string.Empty;
     [Required]
+    public List<string> Accessories { get; set; } = [];
+    [Required]
+    public List<string> Transmission { get; set; } = [];
+    [Required]
     public string Immatriculation { get; set; } = string.Empty;
     [Required] public string ClientCIN { get; set; } = string.Empty;
 }
