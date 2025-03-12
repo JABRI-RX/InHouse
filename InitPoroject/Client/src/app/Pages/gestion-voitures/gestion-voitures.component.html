@@ -1,7 +1,10 @@
 <p-toast />
 <app-filter-voiture (filterVoitureEvent)="filterVoiture($event)" (resetFilterEvent)="resetFilter()"></app-filter-voiture>
 <p-divider />
-<app-lister-voiture [loadingTable]="loadingTable" [voitures]="voitures" (deleteVoitureEvent)="deleteVoiture($event)"></app-lister-voiture>
+<app-lister-voiture [loadingTable]="loadingTable" [voitures]="voitures"
+                    (deleteVoitureEvent)="deleteVoiture($event)"
+                    (editVoitureEvent)="editVoiture($event)"
+></app-lister-voiture>
 <p-divider />
 <div class="flex justify-end m-4">
    <p-button label="Afficher Formulair" (click)="showForm = !showForm" [variant]="showForm ? 'outlined' : undefined" />

@@ -12,6 +12,7 @@ import {MessageService} from 'primeng/api';
 import {Button} from 'primeng/button';
 import {FilterVoitureDto} from '../../Models/FilterVoitureDto';
 import {FormsModule} from '@angular/forms';
+import {UpdateVoitureDto} from '../../Models/UpdateVoitureDto';
 
 @Component({
   selector: 'app-gestion-voitures',
@@ -92,5 +93,9 @@ export class GestionVoituresComponent implements OnInit{
    resetFilter() {
       console.log("Filter Clicked");
       this.populateVoiture(false);
+   }
+
+   editVoiture(updateVoitureDto: UpdateVoitureDto) {
+
    }
 }

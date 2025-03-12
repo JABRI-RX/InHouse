@@ -32,16 +32,24 @@
             <p *ngIf="clientCIN?.hasError('required') && clientCIN?.touched" class="text-red-500">Client CIN
                Obligatoir</p>
          </div>
-         <div class="flex-auto">
+         <div class="flex-auto w-[100%]">
             <label class="  block mb-2"> Accessories </label>
-            <input pInputText formControlName="clientCIN" pKeyFilter="alphanum" class="w-full"/>
-            <p *ngIf="clientCIN?.hasError('required') && clientCIN?.touched" class="text-red-500">Client CIN
-               Obligatoir</p>
+            <p-multiselect [options]="accessoriesList"  formControlName="accessories"
+                           optionLabel="name" placeholder="Choisir Accessories" [maxSelectedLabels]="3"
+                           styleClass="w-full  "/>
+            <p *ngIf="accessories?.invalid && accessories?.touched" class="text-red-500">Choisir Au Mois Un Accessoire</p>
+         </div>
+         <div class="flex-auto w-[100%]">
+            <label class="  block mb-2"> Transmissions </label>
+            <p-multiselect [options]="transmissionsList" formControlName="transmissions"
+                           optionLabel="name" placeholder="Choisir Transmissions" [maxSelectedLabels]="3"
+                           styleClass="w-full  "/>
+            <p *ngIf="transmissions?.invalid && transmissions?.touched" class="text-red-500">Choisir Au Mois Un Accessoire</p>
          </div>
       </div>
       <div class="flex justify-end gap-2">
          <p-button label="Cancel" severity="contrast" (click)="visible = false"/>
-         <p-button label="Save" (click)="visible = false" severity="warn"/>
+         <p-button label="Save" (click)="editVoiture()" severity="warn" [disabled]="editVoitureForm.invalid"/>
       </div>
    </form>
 

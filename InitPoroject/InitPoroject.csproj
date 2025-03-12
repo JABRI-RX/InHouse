@@ -55,6 +55,7 @@
 
     <ItemGroup>
       <Folder Include="Client\src\app\Services\" />
+      <Folder Include="Migrations\" />
     </ItemGroup>
 
 </Project>

@@ -22,8 +22,11 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddDbContext<AppDbContext>(options =>
 {
-    // options.UseSqlServer(builder.Configuration.GetConnectionString("sqlserver"));
-    options.UseSqlite(builder.Configuration.GetConnectionString("sqlite"));
+    // if(builder.Environment.IsDevelopment())
+        options.UseSqlServer(builder.Configuration.GetConnectionString("sqlserver"));
+    // else
+    //     options.UseSqlServer(builder.Configuration.GetConnectionString("sqlserver"));
+            
 });
 builder.Services.AddScoped<IProductRepository, ProductRepository>();
 builder.Services.AddScoped<IClientRepository,ClientRepository>();

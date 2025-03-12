@@ -10,7 +10,6 @@ public static class VoitureMapper
     {
         return new ReadVoitureDto
         {
-            Id = voiture.Id,
             Annee = voiture.Annee,
             Immatriculation = voiture.Immatriculation,
             Marque = voiture.Marque,

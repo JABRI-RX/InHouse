@@ -17,6 +17,5 @@ public class UpdateVoitureDto
     [Required]
     public List<string> Transmission { get; set; } = [];
     [Required]
-    public string Immatriculation { get; set; } = string.Empty;
     [Required] public string ClientCIN { get; set; } = string.Empty;
 }

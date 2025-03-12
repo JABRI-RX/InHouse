@@ -73,21 +73,7 @@ export class AjouterVoitureComponent implements OnInit {
    }
 
    addVoiture() {
-      // if( this.selectedColor === undefined || this.selectedMarque === undefined)
-      // {
-      //    console.log("Populate the selects");
-      //    return;
-      // }
-      // this.addVoitureForm.patchValue({
-      //    marque: this.selectedMarque?.code  ??"NOTHING",
-      //    couleur: this.selectedColor?.code ?? "NOTHING",
-      //    annee: this.selectedYear?.code ?? "0000",
-      //    accessories: this.selectedAccessories?.map(a=>a.code),
-      //    transmission: this.selectedTransmission.map(a=>a.code)
-      // })
-      // console.log(this.addVoitureForm.value.annee?.code);
 
-      // console.log(this.addVoitureForm.value);
       if(this.addVoitureForm.invalid )
       {
          console.log("Form is Invalid");

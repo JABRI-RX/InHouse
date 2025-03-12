@@ -7,6 +7,8 @@ import {ModifierVoitureModalComponent} from '../modifier-modal/modifier-voiture-
 import {SupprimerVoitureModalComponent} from '../supprimer-modal/supprimer-modal.component';
 import {AjouterVoitureComponent} from '../ajouter-voiture/ajouter-voiture.component';
 import {ProgressSpinner} from 'primeng/progressspinner';
+import {Button} from 'primeng/button';
+import {UpdateVoitureDto} from '../../Models/UpdateVoitureDto';
 
 @Component({
   selector: 'app-lister-voiture',
@@ -15,8 +17,8 @@ import {ProgressSpinner} from 'primeng/progressspinner';
       ModifierVoitureModalComponent,
       SupprimerVoitureModalComponent,
       ConsulterVoitureModalComponent,
-      AjouterVoitureComponent,
       ProgressSpinner,
+      Button,
 
    ],
   templateUrl: './lister-voiture.component.html',
@@ -24,13 +26,21 @@ import {ProgressSpinner} from 'primeng/progressspinner';
 })
 export class ListerVoitureComponent implements OnInit{
    @Input() voitures: ReadVoitureDto[]  = [];
-   @Output() deleteVoitureEvent = new EventEmitter<string>();
    @Input() loadingTable: boolean = false;
+   @Output() deleteVoitureEvent = new EventEmitter<string>();
+   @Output() editVoitureEvent = new EventEmitter<UpdateVoitureDto>();
+   @Output() showAllVoituresEvent = new EventEmitter<boolean>();
    ngOnInit(): void {
 
    }
+   showAllVoiture(showAll:boolean){
 
+   }
    deleteVoiture(immatriculation: string) {
       this.deleteVoitureEvent.emit(immatriculation);
+   }
+
+   editVoiture(updateVoitureDto: UpdateVoitureDto) {
+      this.editVoitureEvent.emit(updateVoitureDto);
    }
 }

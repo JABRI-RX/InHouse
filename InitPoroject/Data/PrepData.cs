@@ -14,7 +14,7 @@ public static class PrepData
                 throw new ArgumentNullException("DbContext empty");
             }
 
-            SeedProducts(context);
+            // SeedProducts(context);
             SeedClient(context);
             // SeedVoitures(context);
             context.SaveChanges();
@@ -160,7 +160,6 @@ public static class PrepData
             {
                 new Voiture
                 {
-                    Id = 1,
                     Marque = "Renault",
                     Modele = "Clio",
                     Couleur = "Noir",
@@ -172,7 +171,6 @@ public static class PrepData
                 },
                 new Voiture
                 {
-                    Id = 2,
                     Marque = "Peugeot",
                     Modele = "208",
                     Couleur = "Blanc",
@@ -195,7 +193,6 @@ public static class PrepData
             {
                 new Voiture
                 {
-                    Id = 3,
                     Marque = "Dacia",
                     Modele = "Sandero",
                     Couleur = "Blanche",
@@ -207,7 +204,6 @@ public static class PrepData
                 },
                 new Voiture
                 {
-                    Id = 4,
                     Marque = "Hyundai",
                     Modele = "i20",
                     Couleur = "Noir",
@@ -230,7 +226,6 @@ public static class PrepData
             {
                 new Voiture
                 {
-                    Id = 5,
                     Marque = "Toyota",
                     Modele = "Corolla",
                     Couleur = "Rouge",
@@ -242,7 +237,6 @@ public static class PrepData
                 },
                 new Voiture
                 {
-                    Id = 6,
                     Marque = "Renault",
                     Modele = "Megane",
                     Couleur = "Gris",
@@ -265,7 +259,6 @@ public static class PrepData
             {
                 new Voiture
                 {
-                    Id = 7,
                     Marque = "Peugeot",
                     Modele = "3008",
                     Couleur = "Bleu",
@@ -277,7 +270,6 @@ public static class PrepData
                 },
                 new Voiture
                 {
-                    Id = 8,
                     Marque = "Citroën",
                     Modele = "C4",
                     Couleur = "Noir",
@@ -300,7 +292,6 @@ public static class PrepData
             {
                 new Voiture
                 {
-                    Id = 9,
                     Marque = "Ford",
                     Modele = "Focus",
                     Couleur = "Vert",
@@ -312,7 +303,6 @@ public static class PrepData
                 },
                 new Voiture
                 {
-                    Id = 10,
                     Marque = "Kia",
                     Modele = "Sportage",
                     Couleur = "Blanc",

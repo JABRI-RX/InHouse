@@ -1,7 +1,12 @@
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+using Microsoft.Identity.Client.Extensions.Msal;
+
 namespace InitPoroject.Domain.Entity;
 
 public class Voiture
 {
+    
     public int Id { get; set; }
     public string Marque { get; set; } = string.Empty;
     public string Modele { get; set; } = string.Empty;
