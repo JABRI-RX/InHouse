@@ -1,4 +1,5 @@
 using InitPoroject.Domain.Entity;
+using InitPoroject.Domain.Entity.VoitureM;
 using InitPoroject.Dto.Voiture;
 using Microsoft.VisualStudio.Web.CodeGenerators.Mvc.Templates.Blazor;
 

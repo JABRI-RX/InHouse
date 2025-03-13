@@ -5,7 +5,7 @@
    </div>
 } @else {
    <div class="overflow-x-auto mt-3 p-6">
-      <p-table [value]="voitures" [tableStyle]="{ 'min-width': '50rem' }" class="text-base!">
+      <p-table [value]="voitures" scrollHeight="500px" [tableStyle]="{ 'min-width': '50rem' }" class="text-base!">
          <ng-template #header class="bg-[#272c34]! text-white! text-lg">
             <tr class="">
                <th class="bg-[#272c34]! text-white! text-left align-top"></th>
@@ -22,7 +22,7 @@
          </ng-template>
 
          <ng-template #body let-voiture>
-            <tr class="fadeIn">
+            <tr class="fadeIn"  >
                <td class="text-left align-top"></td>
                <td class="text-left align-top">{{ voiture.immatriculation }}</td>
                <td class="text-left align-top">{{ voiture.marque }}</td>

@@ -77,11 +77,17 @@ export class GestionVoituresComponent implements OnInit{
       this.voitureService.updateVoiture(updateVoitureDto)
          .subscribe({
             next:()=> {
-               this.populateVoiture(false);
+               const updateVoitureIndex = this.voitures.findIndex(v=>v.immatriculation === updateVoitureDto.immatriculation);
+               this.voitures[updateVoitureIndex].marque = updateVoitureDto.marque;
+               this.voitures[updateVoitureIndex].annee = updateVoitureDto.annee;
+               this.voitures[updateVoitureIndex].couleur = updateVoitureDto.couleur;
+               this.voitures[updateVoitureIndex].modele = updateVoitureDto.modele;
+               this.voitures[updateVoitureIndex].accessories = updateVoitureDto.accessories;
+               this.voitures[updateVoitureIndex].transmission = updateVoitureDto.transmission;
                this.messageService.add({ severity: 'success', summary: 'Stat', detail: "Voiture Modifier", life: 3000 });
             },
             error:(error:HttpErrorResponse)=>{
-               this.messageService.add({ severity: 'success', summary: 'Stat', detail: error.error.message, life: 3000 });
+               this.messageService.add({ severity: 'error', summary: 'Stat', detail: error.error.message, life: 3000 });
             }
          })
    }
@@ -98,7 +104,6 @@ export class GestionVoituresComponent implements OnInit{
             }
          })
    }
-
 
    resetFilter() {
       console.log("Filter Clicked");

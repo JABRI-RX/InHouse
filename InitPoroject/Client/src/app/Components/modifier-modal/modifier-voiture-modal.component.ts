@@ -114,5 +114,6 @@ export class ModifierVoitureModalComponent implements OnInit {
          clientCIN:this.clientCIN?.value,
       }
       this.editVoitureEvent.emit(updateVoitureDto);
+      this.visible = false;
    }
 }

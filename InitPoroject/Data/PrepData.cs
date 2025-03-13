@@ -1,4 +1,5 @@
 using InitPoroject.Domain.Entity;
+using InitPoroject.Domain.Entity.VoitureM;
 using Microsoft.EntityFrameworkCore;
 
 namespace InitPoroject.Data;

@@ -1,4 +1,5 @@
 using System.ComponentModel.DataAnnotations;
+using InitPoroject.Domain.Entity.VoitureM;
 
 namespace InitPoroject.Domain.Entity;
 

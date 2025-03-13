@@ -63,7 +63,8 @@ public class VoitureController : ControllerBase
     {
         if (!ModelState.IsValid)
             return BadRequest(ModelState);
-
+        if(await _clientRepository.GetClientByCINAsync(voitureDto.ClientCIN) is null)
+            return NotFound(new {message="Client N'exist Pas"});
         var voiture = await _voitureRepository.UpdateVoitureAsync(immatriculation, voitureDto);
         if (voiture is null)
             return NotFound(new { message = "Voiture N'exust Pas" });
