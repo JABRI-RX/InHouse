@@ -27,7 +27,7 @@ export class VoitureService {
       return this.httpClient.get<ReadVoitureDto[]>(apiurl + "voitures?"+query);
    }
    updateVoiture( updateVoitureDto:UpdateVoitureDto):Observable<any>{
-
+      return this.httpClient.put(apiurl+"voitures/"+updateVoitureDto.immatriculation,updateVoitureDto);
    }
    deleteVoiture(immatriculation: string): Observable<string> {
       return this.httpClient.delete<string>(apiurl + "voitures/" + immatriculation);

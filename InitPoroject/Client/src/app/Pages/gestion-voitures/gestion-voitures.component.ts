@@ -47,7 +47,7 @@ export class GestionVoituresComponent implements OnInit{
       this.populateVoiture(true);
       this.filterVoituresQuery = {}
    }
-   ajouterVoiture(voiture:CreateVoitureDto){
+   addVoiture(voiture:CreateVoitureDto){
       console.log(voiture);
       this.voitureService.addVoiture(voiture).subscribe({
          next:(value)=>{
@@ -58,22 +58,6 @@ export class GestionVoituresComponent implements OnInit{
             this.messageService.add({ severity: 'error', summary: 'Stat', detail: error.error.message, life: 3000 });
          }
       });
-   }
-   modifierVoiture(immatriculation:string){
-
-   }
-   deleteVoiture(immatriculation:string){
-      this.voitureService.deleteVoiture(immatriculation)
-         .subscribe({
-            next:(value)=>{
-               this.messageService.add({ severity: 'success', summary: 'Stat', detail: "Voiture Supprimer", life: 3000 });
-
-               this.populateVoiture(false);
-            },
-            error:(error:HttpErrorResponse)=>{
-
-            }
-         })
    }
    populateVoiture(filterSearchState:boolean){
       this.loadingTable = true;
@@ -89,13 +73,37 @@ export class GestionVoituresComponent implements OnInit{
             }
          })
    }
+   editVoiture(updateVoitureDto: UpdateVoitureDto) {
+      this.voitureService.updateVoiture(updateVoitureDto)
+         .subscribe({
+            next:()=> {
+               this.populateVoiture(false);
+               this.messageService.add({ severity: 'success', summary: 'Stat', detail: "Voiture Modifier", life: 3000 });
+            },
+            error:(error:HttpErrorResponse)=>{
+               this.messageService.add({ severity: 'success', summary: 'Stat', detail: error.error.message, life: 3000 });
+            }
+         })
+   }
+   deleteVoiture(immatriculation:string){
+      this.voitureService.deleteVoiture(immatriculation)
+         .subscribe({
+            next:(value)=>{
+               this.messageService.add({ severity: 'success', summary: 'Stat', detail: "Voiture Supprimer", life: 3000 });
+
+               this.populateVoiture(false);
+            },
+            error:(error:HttpErrorResponse)=>{
+
+            }
+         })
+   }
+
 
    resetFilter() {
       console.log("Filter Clicked");
       this.populateVoiture(false);
    }
 
-   editVoiture(updateVoitureDto: UpdateVoitureDto) {
 
-   }
 }

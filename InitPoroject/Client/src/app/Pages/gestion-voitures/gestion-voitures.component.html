@@ -9,4 +9,4 @@
 <div class="flex justify-end m-4">
    <p-button label="Afficher Formulair" (click)="showForm = !showForm" [variant]="showForm ? 'outlined' : undefined" />
 </div>
-<app-ajouter-voiture [showForm]="showForm" (addVoitureEvent)="ajouterVoiture($event)" />
+<app-ajouter-voiture [showForm]="showForm" (addVoitureEvent)="addVoiture($event)" />

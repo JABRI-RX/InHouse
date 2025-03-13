@@ -34,7 +34,7 @@ public static class VoitureMapper
             ClientCIN = voiture.ClientCIN
         };
     }
-    public static Voiture FromUpdateToNormal(this UpdateVoitureDto voiture)
+    public static Voiture FromUpdateToNormal(this UpdateVoitureDto voiture,string immatriculation )
     {
         return new Voiture
         {
@@ -42,7 +42,7 @@ public static class VoitureMapper
             Modele = voiture.Modele,
             Annee = voiture.Annee,
             Couleur = voiture.Couleur,
-            Immatriculation = voiture.Immatriculation,
+            Immatriculation = immatriculation,
             Accessories = voiture.Accessories,
             Transmission = voiture.Transmission,
             ClientCIN = voiture.ClientCIN

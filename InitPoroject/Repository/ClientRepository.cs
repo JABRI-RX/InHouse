@@ -52,10 +52,10 @@ public class ClientRepository : IClientRepository
         client.Prenom = clientDto.Prenom;
         client.Voitures = [];
         Console.WriteLine(clientDto.Voitures.Count);
-        foreach (var voiture in clientDto.Voitures)
-        {
-            client.Voitures.Add(voiture.FromUpdateToNormal());
-        }
+        // foreach (var voiture in clientDto.Voitures)
+        // {
+        //     client.Voitures.Add(voiture.FromUpdateToNormal());
+        // }
         var gclient = await _context.Clients.FirstOrDefaultAsync(c => c.CIN.Equals(cin));
         Console.WriteLine(gclient.Voitures.Count);
         await _context.SaveChangesAsync();

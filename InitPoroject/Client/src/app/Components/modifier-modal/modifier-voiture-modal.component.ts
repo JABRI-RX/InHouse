@@ -46,7 +46,7 @@ export class ModifierVoitureModalComponent implements OnInit {
    // years
    //this list is used for listing all accessories to populate the whole listing
    accessoriesList: SelectOBj[] = [];
-   //this list is used for listing all accessories that are selected already
+   //this list is used for listing all accessories that are selected already in the Input voiture
    selectedVoitureAccessoriesList: SelectOBj[] = [];
 
    //this list is used for listing all Transmission to populate the whole listing
@@ -68,7 +68,7 @@ export class ModifierVoitureModalComponent implements OnInit {
       this.selectedVoitureAccessoriesList = mapSelectedAccessories(this.voiture?.accessories!);
       const mapSelectedTransmission = (transmission: string[]): SelectOBj[] => {
          return transmission.map(trans => ({name: trans, code: trans})) ?? [];
-      }
+      } ;
       this.selectedVoitureTransmissionsList = mapSelectedTransmission(this.voiture?.transmission!);
 
       //we use the selectObj to map the data from the voiture
