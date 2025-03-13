@@ -48,13 +48,13 @@ public class VoitureController : ControllerBase
             return BadRequest(new { message = "CLient N'exist Pas" });
 
         var voiture = await _voitureRepository.CreateCarAsync(voitureDto.FromCreateToNormal());
-        if (voiture is null)
-            return BadRequest(new { message = "Voiture Exist Deja" });
+        if (voiture.Voiture is null)
+            return BadRequest(new { message = voiture.Message });
 
         return CreatedAtAction(
             nameof(GetVoitureByImma),
-            new { immatriculation = voiture.Immatriculation },
-            voiture.ToReadVoitureDto()
+            new { immatriculation = voiture },
+            voiture.Voiture.ToReadVoitureDto()
         );
     }
 
@@ -66,11 +66,10 @@ public class VoitureController : ControllerBase
         if(await _clientRepository.GetClientByCINAsync(voitureDto.ClientCIN) is null)
             return NotFound(new {message="Client N'exist Pas"});
         var voiture = await _voitureRepository.UpdateVoitureAsync(immatriculation, voitureDto);
-        if (voiture is null)
+        if (voiture.Voiture is null)
             return NotFound(new { message = "Voiture N'exust Pas" });
-        return Ok(voiture.ToReadVoitureDto());
+        return Ok(voiture.Voiture.ToReadVoitureDto());
     }
-
     [HttpDelete("{immatriculation}")]
     public async Task<IActionResult> DeleteVoiture(string immatriculation)
     {

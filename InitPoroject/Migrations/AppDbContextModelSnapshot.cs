@@ -84,7 +84,26 @@ namespace InitPoroject.Migrations
                     b.ToTable("Products");
                 });
 
-            modelBuilder.Entity("InitPoroject.Domain.Entity.Voiture", b =>
+            modelBuilder.Entity("InitPoroject.Domain.Entity.VoitureM.Couleur", b =>
+                {
+                    b.Property<int>("CouleurId")
+                        .ValueGeneratedOnAdd()
+                        .HasMaxLength(50)
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("CouleurId"));
+
+                    b.Property<string>("NomCouleur")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.HasKey("CouleurId");
+
+                    b.ToTable("Couleurs");
+                });
+
+            modelBuilder.Entity("InitPoroject.Domain.Entity.VoitureM.Voiture", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -103,9 +122,9 @@ namespace InitPoroject.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<string>("Couleur")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("CouleurId")
+                        .HasMaxLength(50)
+                        .HasColumnType("int");
 
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
@@ -130,10 +149,12 @@ namespace InitPoroject.Migrations
 
                     b.HasIndex("ClientCIN");
 
+                    b.HasIndex("CouleurId");
+
                     b.ToTable("Voitures");
                 });
 
-            modelBuilder.Entity("InitPoroject.Domain.Entity.Voiture", b =>
+            modelBuilder.Entity("InitPoroject.Domain.Entity.VoitureM.Voiture", b =>
                 {
                     b.HasOne("InitPoroject.Domain.Entity.Client", "Client")
                         .WithMany("Voitures")
@@ -141,10 +162,23 @@ namespace InitPoroject.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("InitPoroject.Domain.Entity.VoitureM.Couleur", "Couleur")
+                        .WithMany("Voitures")
+                        .HasForeignKey("CouleurId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.Navigation("Client");
+
+                    b.Navigation("Couleur");
                 });
 
             modelBuilder.Entity("InitPoroject.Domain.Entity.Client", b =>
+                {
+                    b.Navigation("Voitures");
+                });
+
+            modelBuilder.Entity("InitPoroject.Domain.Entity.VoitureM.Couleur", b =>
                 {
                     b.Navigation("Voitures");
                 });

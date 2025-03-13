@@ -10,8 +10,9 @@ public class CreateVoitureDto
     public string Modele { get; set; } = string.Empty;
     [Required]
     public int Annee { get; set; }
-    [Required]
-    public string Couleur { get; set; } = string.Empty;
+
+    [Required] 
+    public int CouleurId { get; set; } 
     [Required]
     public string Immatriculation { get; set; } = string.Empty;
     [Required]

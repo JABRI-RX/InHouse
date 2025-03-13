@@ -9,12 +9,19 @@ public class AppDbContext(DbContextOptions<AppDbContext> options) : DbContext(op
     public DbSet<Product> Products { get; set; }
     public DbSet<Client> Clients { get; set; }
     public DbSet<Voiture> Voitures { get; set; }
+    public DbSet<Couleur> Couleurs { get; set; }
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         base.OnModelCreating(modelBuilder);
+        //jointure voiture -> Client vise versa 
         modelBuilder.Entity<Voiture>()
-            .HasOne(c => c.Client)
-            .WithMany(v => v.Voitures)
-            .HasForeignKey(c => c.ClientCIN);
+            .HasOne(v => v.Client)
+            .WithMany(c => c.Voitures)
+            .HasForeignKey(v => v.ClientCIN);
+        //jointure voiture->couleur
+        modelBuilder.Entity<Voiture>()
+            .HasOne(v => v.Couleur)
+            .WithMany(c => c.Voitures)
+            .HasForeignKey(v => v.CouleurId);
     }
 }

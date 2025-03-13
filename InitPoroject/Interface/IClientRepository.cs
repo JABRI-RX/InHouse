@@ -7,6 +7,7 @@ public interface IClientRepository
 {
     Task<Client?> CreateClientAsync(Client client);
     Task<Client?> GetClientByCINAsync(string cin);
+    Task<bool> CheckClientExists(string cin);
     Task<IList<Client>?> GetAllCLientAsync();
     Task<Client?> UpdateClientAsync(string cin, UpdateClientDto clientDto);
     Task<bool> DeleteClientByCINAsync(string cin);

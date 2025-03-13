@@ -15,108 +15,117 @@ public static class PrepData
                 throw new ArgumentNullException("DbContext empty");
             }
 
-            // SeedProducts(context);
+            SeedCouleurs(context);
             SeedClient(context);
             // SeedVoitures(context);
             context.SaveChanges();
         }
     }
 
-    private static void SeedProducts(AppDbContext context)
+    private static void SeedCouleurs(AppDbContext context)
     {
-        if (context.Products.Any())
+        if (context.Couleurs.Any())
             return;
-
-        context.Products.AddRange(
-            new Product
+        context.Couleurs.AddRange(
+            new Couleur
             {
-                Name = "Car",
-                Category = "AutoMobile",
-                Colors = ["Red", "Green", "White"],
-                Price = 1000,
-                Quantity = 4,
-                UpdatedAt = DateTime.Now
+                NomCouleur = "Noir",
+                Voitures = []
             },
-            new Product
+            new Couleur
             {
-                Name = "Laptop",
-                Category = "Computer",
-                Colors = ["Black", "Green", "White"],
-                Price = 300,
-                Quantity = 40,
-                UpdatedAt = DateTime.Now
+                NomCouleur = "Blanc",
+                Voitures = []
             },
-            new Product
+            new Couleur
             {
-                Name = "Notebook",
-                Category = "Books",
-                Colors = ["Red", "Green", "White", "Yellow"],
-                Price = 100,
-                Quantity = 100,
-                UpdatedAt = DateTime.Now
+                NomCouleur = "Gris",
+                Voitures = []
             },
-            new Product
+            new Couleur
             {
-                Name = "Smartphone",
-                Category = "Electronics",
-                Colors = ["Black", "Blue", "Silver"],
-                Price = 700,
-                Quantity = 25,
-                UpdatedAt = DateTime.Now
+                NomCouleur = "Argent",
+                Voitures = []
             },
-            new Product
+            new Couleur
             {
-                Name = "Washing Machine",
-                Category = "Home Appliances",
-                Colors = ["White", "Grey"],
-                Price = 450,
-                Quantity = 15,
-                UpdatedAt = DateTime.Now
+                NomCouleur = "Bleu",
+                Voitures = []
             },
-            new Product
+            new Couleur
             {
-                Name = "Table",
-                Category = "Furniture",
-                Colors = ["Brown", "Black"],
-                Price = 150,
-                Quantity = 30,
-                UpdatedAt = DateTime.Now
+                NomCouleur = "Rouge",
+                Voitures = []
             },
-            new Product
+            new Couleur
             {
-                Name = "Bicycle",
-                Category = "Sports & Outdoors",
-                Colors = ["Red", "Blue", "Black"],
-                Price = 500,
-                Quantity = 20,
-                UpdatedAt = DateTime.Now
+                NomCouleur = "Vert",
+                Voitures = []
             },
-            new Product
+            new Couleur
             {
-                Name = "Headphones",
-                Category = "Audio",
-                Colors = ["Black", "White"],
-                Price = 120,
-                Quantity = 60,
-                UpdatedAt = DateTime.Now
+                NomCouleur = "Jaune",
+                Voitures = []
             },
-            new Product
+            new Couleur
             {
-                Name = "Smartwatch",
-                Category = "Wearables",
-                Colors = ["Black", "Silver", "Gold"],
-                Price = 250,
-                Quantity = 35,
-                UpdatedAt = DateTime.Now
+                NomCouleur = "Orange",
+                Voitures = []
             },
-            new Product
+            new Couleur
             {
-                Name = "Refrigerator",
-                Category = "Home Appliances",
-                Colors = ["Silver", "White"],
-                Price = 900,
-                Quantity = 10,
-                UpdatedAt = DateTime.Now
+                NomCouleur = "Marron",
+                Voitures = []
+            },
+            new Couleur
+            {
+                NomCouleur = "Beige",
+                Voitures = []
+            },
+            new Couleur
+            {
+                NomCouleur = "Rose",
+                Voitures = []
+            },
+            new Couleur
+            {
+                NomCouleur = "Violet",
+                Voitures = []
+            },
+            new Couleur
+            {
+                NomCouleur = "Or",
+                Voitures = []
+            },
+            new Couleur
+            {
+                NomCouleur = "Bronze",
+                Voitures = []
+            },
+            new Couleur
+            {
+                NomCouleur = "Turquoise",
+                Voitures = []
+            },
+            new Couleur
+            {
+                NomCouleur = "Bordeaux",
+                Voitures = []
+            },
+            new Couleur
+            {
+                NomCouleur = "Mauve",
+                Voitures = []
+            },
+            new Couleur
+            {
+                NomCouleur = "Corail",
+                Voitures = []
+            },
+            new Couleur
+            {
+                NomCouleur = "Indigo",
+                Voitures = []
             }
         );
     }
@@ -163,7 +172,7 @@ public static class PrepData
                 {
                     Marque = "Renault",
                     Modele = "Clio",
-                    Couleur = "Noir",
+                    CouleurId = 1, // Noir (Black)
                     Annee = 2018,
                     Immatriculation = "A-1234-BC",
                     ClientCIN = "A123456",
@@ -174,12 +183,13 @@ public static class PrepData
                 {
                     Marque = "Peugeot",
                     Modele = "208",
-                    Couleur = "Blanc",
+                    CouleurId = 2, // Blanc (White)
                     Annee = 2020,
                     Immatriculation = "A-5678-DE",
                     ClientCIN = "A123456",
                     Transmission = new List<string> { "Rear-Wheel Drive", "All-Wheel Drive" },
-                    Accessories = new List<string> { "Sunroof", "Heated Seats", "Navigation System", "Rearview Camera" }
+                    Accessories = new List<string>
+                        { "Sunroof", "Heated Seats", "Navigation System", "Rearview Camera" }
                 }
             }
         },
@@ -196,7 +206,7 @@ public static class PrepData
                 {
                     Marque = "Dacia",
                     Modele = "Sandero",
-                    Couleur = "Blanche",
+                    CouleurId = 2, // Blanc (White)
                     Annee = 2019,
                     Immatriculation = "B-9101-FG",
                     ClientCIN = "B654321",
@@ -207,7 +217,7 @@ public static class PrepData
                 {
                     Marque = "Hyundai",
                     Modele = "i20",
-                    Couleur = "Noir",
+                    CouleurId = 1, // Noir (Black)
                     Annee = 2021,
                     Immatriculation = "B-1121-HI",
                     ClientCIN = "B654321",
@@ -229,7 +239,7 @@ public static class PrepData
                 {
                     Marque = "Toyota",
                     Modele = "Corolla",
-                    Couleur = "Rouge",
+                    CouleurId = 6, // Rouge (Red)
                     Annee = 2022,
                     Immatriculation = "C-3141-JK",
                     ClientCIN = "C987654",
@@ -240,12 +250,13 @@ public static class PrepData
                 {
                     Marque = "Renault",
                     Modele = "Megane",
-                    Couleur = "Gris",
+                    CouleurId = 3, // Gris (Gray)
                     Annee = 2020,
                     Immatriculation = "C-4151-LM",
                     ClientCIN = "C987654",
                     Transmission = new List<string> { "Rear-Wheel Drive", "All-Wheel Drive" },
-                    Accessories = new List<string> { "Navigation System", "Bluetooth", "Parking Sensors", "Rearview Camera" }
+                    Accessories = new List<string>
+                        { "Navigation System", "Bluetooth", "Parking Sensors", "Rearview Camera" }
                 }
             }
         },
@@ -262,7 +273,7 @@ public static class PrepData
                 {
                     Marque = "Peugeot",
                     Modele = "3008",
-                    Couleur = "Bleu",
+                    CouleurId = 5, // Bleu (Blue)
                     Annee = 2021,
                     Immatriculation = "D-5161-NO",
                     ClientCIN = "D123789",
@@ -273,7 +284,7 @@ public static class PrepData
                 {
                     Marque = "Citroën",
                     Modele = "C4",
-                    Couleur = "Noir",
+                    CouleurId = 1, // Noir (Black)
                     Annee = 2019,
                     Immatriculation = "D-6171-PQ",
                     ClientCIN = "D123789",
@@ -295,7 +306,7 @@ public static class PrepData
                 {
                     Marque = "Ford",
                     Modele = "Focus",
-                    Couleur = "Vert",
+                    CouleurId = 7, // Vert (Green)
                     Annee = 2020,
                     Immatriculation = "E-7181-RS",
                     ClientCIN = "E456123",
@@ -306,75 +317,17 @@ public static class PrepData
                 {
                     Marque = "Kia",
                     Modele = "Sportage",
-                    Couleur = "Blanc",
+                    CouleurId = 2, // Blanc (White)
                     Annee = 2022,
                     Immatriculation = "E-8191-TU",
                     ClientCIN = "E456123",
                     Transmission = new List<string> { "Rear-Wheel Drive", "All-Wheel Drive" },
-                    Accessories = new List<string> { "Air Conditioning", "Bluetooth", "Parking Sensors", "Rearview Camera" }
+                    Accessories = new List<string>
+                        { "Air Conditioning", "Bluetooth", "Parking Sensors", "Rearview Camera" }
                 }
             }
         }
     );
-
 }
-
-    // private static void SeedVoitures(AppDbContext context)
-    // {
-    //     if (context.Voitures.Any())
-    //         return;
-    //
-    //     context.Voitures.AddRange(
-    //         new Voiture
-    //         {
-    //             Id = 1,
-    //             Marque = "Renault",
-    //             Modele = "Clio",
-    //             Couleur = "Noir",
-    //             Annee = 2018,
-    //             Immatriculation = "A-1234-BC",
-    //             ClientCIN = "A123456",
-    //         },
-    //         new Voiture
-    //         {
-    //             Id = 2,
-    //             Marque = "Peugeot",
-    //             Modele = "208",
-    //             Annee = 2020,
-    //             Couleur = "Noir",
-    //             Immatriculation = "B-5678-DE",
-    //             ClientCIN = "B654321"
-    //         },
-    //         new Voiture
-    //         {
-    //             Id = 3,
-    //             Marque = "Dacia",
-    //             Modele = "Sandero",
-    //             Annee = 2019,
-    //             Couleur = "Blanche",
-    //             Immatriculation = "C-9101-FG",
-    //             ClientCIN = "C987654"
-    //         },
-    //         new Voiture
-    //         {
-    //             Id = 4,
-    //             Marque = "Hyundai",
-    //             Modele = "i20",
-    //             Annee = 2021,
-    //             Couleur = "Noir",
-    //             Immatriculation = "D-1121-HI",
-    //             ClientCIN = "D123789"
-    //         },
-    //         new Voiture
-    //         {
-    //             Id = 5,
-    //             Marque = "Toyota",
-    //             Modele = "Corolla",
-    //             Annee = 2022,
-    //             Couleur = "roughe",
-    //             Immatriculation = "E-3141-JK",
-    //             ClientCIN = "E456123"
-    //         }
-    //     );
-    // }
+    
 }

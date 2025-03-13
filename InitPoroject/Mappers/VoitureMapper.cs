@@ -15,7 +15,7 @@ public static class VoitureMapper
             Immatriculation = voiture.Immatriculation,
             Marque = voiture.Marque,
             Modele = voiture.Modele,
-            Couleur = voiture.Couleur,
+            Couleur = voiture.Couleur.NomCouleur,
             Accessories = voiture.Accessories,
             Transmission = voiture.Transmission,
             ClientCIN = voiture.ClientCIN
@@ -29,7 +29,7 @@ public static class VoitureMapper
             Immatriculation = voiture.Immatriculation,
             Marque = voiture.Marque,
             Modele = voiture.Modele,
-            Couleur = voiture.Couleur,
+            CouleurId = voiture.CouleurId,
             Accessories = voiture.Accessories,
             Transmission = voiture.Transmission,
             ClientCIN = voiture.ClientCIN
@@ -42,7 +42,7 @@ public static class VoitureMapper
             Marque = voiture.Marque,
             Modele = voiture.Modele,
             Annee = voiture.Annee,
-            Couleur = voiture.Couleur,
+            CouleurId = voiture.CouleurId,
             Immatriculation = immatriculation,
             Accessories = voiture.Accessories,
             Transmission = voiture.Transmission,

@@ -31,6 +31,7 @@ builder.Services.AddDbContext<AppDbContext>(options =>
 builder.Services.AddScoped<IProductRepository, ProductRepository>();
 builder.Services.AddScoped<IClientRepository,ClientRepository>();
 builder.Services.AddScoped<IVoitureRepository,VoitureRepository>();
+builder.Services.AddScoped<ICouleurRepository, CouleurRepository>();
 var app = builder.Build();
 using (var scope = app.Services.CreateScope())
 {

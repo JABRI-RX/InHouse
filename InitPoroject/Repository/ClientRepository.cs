@@ -30,13 +30,20 @@ public class ClientRepository : IClientRepository
     {
         return  await _context.Clients
             .Include(c=>c.Voitures)
+            .ThenInclude(v=>v.Couleur)
             .FirstOrDefaultAsync(c=>c.CIN.Equals(cin));
+    }
+
+    public async Task<bool> CheckClientExists(string cin)
+    {
+        return await _context.Clients.AnyAsync(c => c.CIN.Equals(cin));
     }
 
     public async Task<IList<Client>?> GetAllCLientAsync()
     {
         return await _context.Clients
             .Include(c=>c.Voitures)
+                .ThenInclude(v=>v.Couleur)
             .ToListAsync();
     }
     // TODO I dont know why it doesn't update the voitures 

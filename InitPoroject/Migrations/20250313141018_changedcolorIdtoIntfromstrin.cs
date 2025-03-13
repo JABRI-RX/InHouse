@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace InitPoroject.Migrations
 {
     /// <inheritdoc />
-    public partial class InitialSqlServer : Migration
+    public partial class changedcolorIdtoIntfromstrin : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -24,6 +24,19 @@ namespace InitPoroject.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Clients", x => x.CIN);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Couleurs",
+                columns: table => new
+                {
+                    CouleurId = table.Column<int>(type: "int", maxLength: 50, nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    NomCouleur = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Couleurs", x => x.CouleurId);
                 });
 
             migrationBuilder.CreateTable(
@@ -53,11 +66,11 @@ namespace InitPoroject.Migrations
                     Marque = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Modele = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Annee = table.Column<int>(type: "int", nullable: false),
-                    Couleur = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    CouleurId = table.Column<int>(type: "int", maxLength: 50, nullable: false),
                     Immatriculation = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    ClientCIN = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     Accessories = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Transmission = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    ClientCIN = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
                 constraints: table =>
@@ -69,12 +82,23 @@ namespace InitPoroject.Migrations
                         principalTable: "Clients",
                         principalColumn: "CIN",
                         onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Voitures_Couleurs_CouleurId",
+                        column: x => x.CouleurId,
+                        principalTable: "Couleurs",
+                        principalColumn: "CouleurId",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(
                 name: "IX_Voitures_ClientCIN",
                 table: "Voitures",
                 column: "ClientCIN");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Voitures_CouleurId",
+                table: "Voitures",
+                column: "CouleurId");
         }
 
         /// <inheritdoc />
@@ -88,6 +112,9 @@ namespace InitPoroject.Migrations
 
             migrationBuilder.DropTable(
                 name: "Clients");
+
+            migrationBuilder.DropTable(
+                name: "Couleurs");
         }
     }
 }
