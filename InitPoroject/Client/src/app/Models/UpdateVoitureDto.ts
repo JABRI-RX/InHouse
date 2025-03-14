@@ -3,7 +3,7 @@ export interface UpdateVoitureDto {
    marque: string;
    modele: string;
    annee: number;
-   couleur: string;
+   couleurId: string;
    accessories:string[]
    transmission:string[]
    clientCIN: string;

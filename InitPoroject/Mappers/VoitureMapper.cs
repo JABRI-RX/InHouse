@@ -16,6 +16,7 @@ public static class VoitureMapper
             Marque = voiture.Marque,
             Modele = voiture.Modele,
             Couleur = voiture.Couleur.NomCouleur,
+            CouleurId = voiture.CouleurId,
             Accessories = voiture.Accessories,
             Transmission = voiture.Transmission,
             ClientCIN = voiture.ClientCIN
@@ -29,7 +30,7 @@ public static class VoitureMapper
             Immatriculation = voiture.Immatriculation,
             Marque = voiture.Marque,
             Modele = voiture.Modele,
-            CouleurId = voiture.CouleurId,
+            CouleurId = Int32.Parse( voiture.CouleurId)  ,
             Accessories = voiture.Accessories,
             Transmission = voiture.Transmission,
             ClientCIN = voiture.ClientCIN

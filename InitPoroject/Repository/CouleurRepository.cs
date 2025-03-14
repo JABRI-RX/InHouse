@@ -14,6 +14,11 @@ public class CouleurRepository : ICouleurRepository
         _context = context;
     }
 
+    public async Task<IList<Couleur>?> GetAllCouleurs()
+    {
+        return await _context.Couleurs.ToListAsync();
+    }
+
     public async Task<Couleur?> GetCouleurById(int id)
     {
         return await _context.Couleurs.FindAsync(id);

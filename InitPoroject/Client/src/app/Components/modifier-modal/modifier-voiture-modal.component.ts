@@ -9,7 +9,6 @@ import {SelectOBj} from '../../Helpers/SelectOBj';
 import {ReadVoitureDto} from '../../Models/ReadVoitureDto';
 import {commonCarBrands} from '../../Helpers/VoitureMarque';
 import {commonAccessories} from '../../Helpers/AccessoriesData';
-import {commonCarColors} from '../../Helpers/Colors';
 import {commonYears} from '../../Helpers/Annee';
 import {Select} from 'primeng/select';
 import {MultiSelect} from 'primeng/multiselect';
@@ -35,12 +34,12 @@ import {endWith} from 'rxjs';
 })
 export class ModifierVoitureModalComponent implements OnInit {
 
-   @Input() voiture: ReadVoitureDto | undefined;
    @Output() editVoitureEvent = new EventEmitter<UpdateVoitureDto>();
    editVoitureForm!: FormGroup;
 
    visible: boolean = false;
-   colorsList: SelectOBj[] = [];
+   @Input() couleursList: SelectOBj[] = [];
+   @Input() voiture: ReadVoitureDto | undefined;
    marquesList: SelectOBj[] = [];
    yearsList: SelectOBj[] = [];
    // years
@@ -59,7 +58,7 @@ export class ModifierVoitureModalComponent implements OnInit {
       this.marquesList = commonCarBrands;
       this.accessoriesList = commonAccessories;
       this.transmissionsList = commonTransmissions;
-      this.colorsList = commonCarColors;
+
       this.yearsList = commonYears(30);
       //populate the selectedAcc
       const mapSelectedAccessories = (accessories: string[]): SelectOBj[] => {
@@ -83,7 +82,7 @@ export class ModifierVoitureModalComponent implements OnInit {
             [Validators.required]
          ),
          couleur: new FormControl<SelectOBj>(
-            {name: `${this.voiture?.couleur}`, code: `${this.voiture?.couleur}`},
+            {name: `${this.voiture?.couleur}`, code: `${this.voiture?.couleurId}`},
             [Validators.required]
          ),
          accessories: new FormControl<SelectOBj[]>(
@@ -108,12 +107,13 @@ export class ModifierVoitureModalComponent implements OnInit {
          marque:(this.editVoitureForm.value.marque as SelectOBj).code,
          modele:this.modele?.value,
          annee:this.editVoitureForm.value.annee.code,
-         couleur:this.editVoitureForm.value.couleur.code,
+         couleurId:this.editVoitureForm.value.couleur.code,
          accessories:(this.accessories?.value as SelectOBj[]).map(acc=>acc.code),
          transmission:(this.transmissions?.value as SelectOBj[]).map(trans=>trans.code),
          clientCIN:this.clientCIN?.value,
       }
       this.editVoitureEvent.emit(updateVoitureDto);
       this.visible = false;
+      // console.log(updateVoitureDto)
    }
 }

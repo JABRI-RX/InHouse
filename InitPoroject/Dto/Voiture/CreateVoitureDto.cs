@@ -12,7 +12,7 @@ public class CreateVoitureDto
     public int Annee { get; set; }
 
     [Required] 
-    public int CouleurId { get; set; } 
+    public string CouleurId { get; set; } 
     [Required]
     public string Immatriculation { get; set; } = string.Empty;
     [Required]

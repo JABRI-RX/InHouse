@@ -40,13 +40,14 @@ public class VoitureController : ControllerBase
     [HttpPost]
     public async Task<IActionResult> CreateVoiture([FromBody] CreateVoitureDto voitureDto)
     {
+        Console.WriteLine("WAHT THE FUCK");
         if (!ModelState.IsValid)
             return BadRequest(ModelState);
-
-        var client = await _clientRepository.GetClientByCINAsync(voitureDto.ClientCIN);
-        if (client is null)
-            return BadRequest(new { message = "CLient N'exist Pas" });
-
+        //this is used to check for attribitues that have string value but they are int 
+        var checkResult = CheckFunctions.CheckCreateVoitureDto(voitureDto);
+        if (!string.IsNullOrEmpty(checkResult))
+            return BadRequest(new {message=checkResult});
+        
         var voiture = await _voitureRepository.CreateCarAsync(voitureDto.FromCreateToNormal());
         if (voiture.Voiture is null)
             return BadRequest(new { message = voiture.Message });
@@ -63,11 +64,9 @@ public class VoitureController : ControllerBase
     {
         if (!ModelState.IsValid)
             return BadRequest(ModelState);
-        if(await _clientRepository.GetClientByCINAsync(voitureDto.ClientCIN) is null)
-            return NotFound(new {message="Client N'exist Pas"});
         var voiture = await _voitureRepository.UpdateVoitureAsync(immatriculation, voitureDto);
         if (voiture.Voiture is null)
-            return NotFound(new { message = "Voiture N'exust Pas" });
+            return BadRequest(new { message = voiture.Message });
         return Ok(voiture.Voiture.ToReadVoitureDto());
     }
     [HttpDelete("{immatriculation}")]

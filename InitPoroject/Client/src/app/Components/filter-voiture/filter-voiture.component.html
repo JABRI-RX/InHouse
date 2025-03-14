@@ -6,22 +6,22 @@
       <div class="flex flex-wrap gap-4 mb-6">
          <div class="flex-auto">
             <label class="  block mb-2"> Marque </label>
-            <p-select [options]="marques"   [(ngModel)]="selectedMarque" [ngModelOptions]="{standalone: true}"
-                      optionLabel="name" placeholder="Choisir Marque"
+            <p-select [options]="marques"   formControlName="marque"
+                      optionLabel="name" placeholder="Par Marque"
                       class="w-full "/>
 
          </div>
          <div class="flex-auto">
             <label class="  block mb-2"> Couleur </label>
-            <p-select [options]="couleurs"  [(ngModel)]="selectedCouleurs" [ngModelOptions]="{standalone: true}"
-                      optionLabel="name" placeholder="Choisir Marque"
+            <p-select [options]="couleurs"  formControlName="couleur"
+                      optionLabel="name" placeholder="Par couleurs"
                       class="w-full "/>
 
          </div>
          <div class="flex-auto">
             <label class="  block mb-2"> Annee </label>
-            <p-select [options]="annees"   [(ngModel)]="selectedAnnee" [ngModelOptions]="{standalone: true}"
-                      optionLabel="name" placeholder="Choisir Marque"
+            <p-select [options]="annees"   formControlName="annee"
+                      optionLabel="name" placeholder="Par Annee"
                       class="w-full "/>
 
          </div>

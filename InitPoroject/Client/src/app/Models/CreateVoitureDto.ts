@@ -2,7 +2,7 @@ export interface CreateVoitureDto {
    marque: string;
    modele: string;
    annee: number;
-   couleur: string;
+   couleurId: string;
    immatriculation: string;
    accessories:string[]
    transmission:string[]

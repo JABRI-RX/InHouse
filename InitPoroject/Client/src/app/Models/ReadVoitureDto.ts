@@ -4,6 +4,7 @@ export interface ReadVoitureDto {
    modele: string;
    annee: number;
    couleur: string;
+   couleurId:number,
    immatriculation: string;
    accessories:string[]
    transmission:string[]

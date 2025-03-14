@@ -9,6 +9,7 @@ import {AjouterVoitureComponent} from '../ajouter-voiture/ajouter-voiture.compon
 import {ProgressSpinner} from 'primeng/progressspinner';
 import {Button} from 'primeng/button';
 import {UpdateVoitureDto} from '../../Models/UpdateVoitureDto';
+import {SelectOBj} from '../../Helpers/SelectOBj';
 
 @Component({
   selector: 'app-lister-voiture',
@@ -26,6 +27,7 @@ import {UpdateVoitureDto} from '../../Models/UpdateVoitureDto';
 })
 export class ListerVoitureComponent implements OnInit{
    @Input() voitures: ReadVoitureDto[]  = [];
+   @Input() couleurs:SelectOBj[] = [];
    @Input() loadingTable: boolean = false;
    @Output() deleteVoitureEvent = new EventEmitter<string>();
    @Output() editVoitureEvent = new EventEmitter<UpdateVoitureDto>();

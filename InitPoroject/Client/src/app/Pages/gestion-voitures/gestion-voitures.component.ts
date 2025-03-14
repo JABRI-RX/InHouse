@@ -13,6 +13,10 @@ import {Button} from 'primeng/button';
 import {FilterVoitureDto} from '../../Models/FilterVoitureDto';
 import {FormsModule} from '@angular/forms';
 import {UpdateVoitureDto} from '../../Models/UpdateVoitureDto';
+import {SelectOBj} from '../../Helpers/SelectOBj';
+import {ReadCouleur} from '../../Models/Couleur/ReadCouleur';
+import {CouleurService} from '../../Services/couleur.service';
+import {FromReadCouleurToSelectObj} from '../../Helpers/ColorsFunctions';
 
 @Component({
   selector: 'app-gestion-voitures',
@@ -33,13 +37,21 @@ import {UpdateVoitureDto} from '../../Models/UpdateVoitureDto';
 export class GestionVoituresComponent implements OnInit{
    voitures :ReadVoitureDto[] = [];
    filterVoituresQuery:FilterVoitureDto| undefined;
+   //this couleurs used to pass the data to the the children that need it
+   colors:SelectOBj[] = [];
    showForm:boolean = true;
    loadingTable: boolean = false;
    constructor(private voitureService:VoitureService,
+               protected couleurService:CouleurService,
                private messageService : MessageService) {
    }
 
    ngOnInit(): void {
+      //init colors
+      this.couleurService.getAllCouleurs().subscribe({
+         next:(values)=>this.colors = FromReadCouleurToSelectObj(values)
+      })
+
       this.populateVoiture(false);
    }
    filterVoiture(voiture:FilterVoitureDto){
@@ -76,11 +88,11 @@ export class GestionVoituresComponent implements OnInit{
    editVoiture(updateVoitureDto: UpdateVoitureDto) {
       this.voitureService.updateVoiture(updateVoitureDto)
          .subscribe({
-            next:()=> {
+            next:(readDto)=> {
                const updateVoitureIndex = this.voitures.findIndex(v=>v.immatriculation === updateVoitureDto.immatriculation);
                this.voitures[updateVoitureIndex].marque = updateVoitureDto.marque;
                this.voitures[updateVoitureIndex].annee = updateVoitureDto.annee;
-               this.voitures[updateVoitureIndex].couleur = updateVoitureDto.couleur;
+               this.voitures[updateVoitureIndex].couleur = readDto.couleur;
                this.voitures[updateVoitureIndex].modele = updateVoitureDto.modele;
                this.voitures[updateVoitureIndex].accessories = updateVoitureDto.accessories;
                this.voitures[updateVoitureIndex].transmission = updateVoitureDto.transmission;

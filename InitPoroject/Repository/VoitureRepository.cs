@@ -25,11 +25,15 @@ public class VoitureRepository : IVoitureRepository
         var getvoiture = await GetCarByImmatriculationAsync(voiture.Immatriculation);
         if (getvoiture is not null) //return null indicates that it exists
             return new VoitureResponse { Message = "Voiture Existe Deja" };
+        if (!await _clientRepository.CheckClientExists(voiture.ClientCIN))
+            return new VoitureResponse { Message = "Client N'exist Pas" };
+        
         if (!await _couleurRepository.CheckCouleurIdExist(voiture.CouleurId))
-            return new VoitureResponse { Message = "Couleur N'exist Pas" };
+            return new VoitureResponse { Message = "Couleur N'exist Pas Ou Format Incorrect" };
         //add marq 
         await _context.Voitures.AddAsync(voiture);
         await _context.SaveChangesAsync();
+        voiture.Couleur = await _couleurRepository.GetCouleurById(voiture.CouleurId);
         return new VoitureResponse { Voiture = voiture };
     }
 
@@ -42,7 +46,7 @@ public class VoitureRepository : IVoitureRepository
         if (!string.IsNullOrWhiteSpace(queryObjectVoiture.Marque))
             voitures = voitures.Where(v => v.Marque.ToLower().Equals(queryObjectVoiture.Marque.ToLower()));
 
-        if (!string.IsNullOrWhiteSpace(queryObjectVoiture.CouleurId))
+        if (!string.IsNullOrWhiteSpace(queryObjectVoiture.CouleurId.ToString()))
             // voitures = voitures.Where(v => v.Couleur.ToLower().Equals(queryObjectVoiture.Couleur.ToLower()));
             voitures = voitures.Where(v => v.CouleurId.Equals(queryObjectVoiture.CouleurId));
         if (!string.IsNullOrWhiteSpace(queryObjectVoiture.Annee))
@@ -93,16 +97,17 @@ public class VoitureRepository : IVoitureRepository
     {
         var voiture = await GetCarByImmatriculationAsync(immatriculation);
         if (voiture is null)
-            return new VoitureResponse { Message = "Voiture Existe Deja" };
-        if(!await _clientRepository.CheckClientExists(voitureDto.ClientCIN))
-            return new 
+            return new VoitureResponse { Message = "Voiture N'existe Deja" };
+        if (!await _clientRepository.CheckClientExists(voitureDto.ClientCIN))
+            return new VoitureResponse { Message = "Client N'existe Pas" };
         if (!await _couleurRepository.CheckCouleurIdExist(voitureDto.CouleurId))
-            return new VoitureResponse { Message = "Couleur N'Exsite Pas" };
+            return new VoitureResponse { Message = "Couleur N'exist Pas" };
         voiture.Marque = voitureDto.Marque;
         voiture.Annee = voitureDto.Annee;
         voiture.Modele = voitureDto.Modele;
         voiture.CouleurId = voitureDto.CouleurId;
         voiture.ClientCIN = voitureDto.ClientCIN;
+        voiture.Couleur = await _couleurRepository.GetCouleurById(voitureDto.CouleurId);
         voiture.Accessories = voitureDto.Accessories;
         voiture.Transmission = voitureDto.Transmission;
         await _context.SaveChangesAsync();

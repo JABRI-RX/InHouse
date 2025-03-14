@@ -22,7 +22,7 @@
          </ng-template>
 
          <ng-template #body let-voiture>
-            <tr class="fadeIn"  >
+            <tr class="fadeIn">
                <td class="text-left align-top"></td>
                <td class="text-left align-top">{{ voiture.immatriculation }}</td>
                <td class="text-left align-top">{{ voiture.marque }}</td>
@@ -43,7 +43,10 @@
                <td class="text-left align-top">{{ voiture.clientCIN }}</td>
                <td class="text-left align-top">
                   <div class="space-x-2 ">
-                     <app-modifier-voiture-modal [voiture]="voiture" (editVoitureEvent)="editVoiture($event)"/>
+                     <app-modifier-voiture-modal
+                        [couleursList]="couleurs"
+                        [voiture]="voiture"
+                        (editVoitureEvent)="editVoiture($event)"/>
                      <app-consulter-voiture-modal [voiture]="voiture"/>
                      <app-supprimer-voiture-modal (deleteVoitureEvent)="deleteVoiture($event)" [voiture]="voiture"/>
                   </div>
