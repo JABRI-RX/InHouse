@@ -16,10 +16,38 @@ public static class PrepData
             }
 
             SeedCouleurs(context);
+            SeedMarque(context);
             SeedClient(context);
-            // SeedVoitures(context);
             context.SaveChanges();
         }
+    }
+
+    private static void SeedMarque(AppDbContext context)
+    {
+        if (context.Marques.Any())
+            return;
+        context.Marques.AddRange(
+            new Marque { NomMarque = "Renault" },
+            new Marque { NomMarque = "Dacia" },
+            new Marque { NomMarque = "Peugeot" },
+            new Marque { NomMarque = "Citroën" },
+            new Marque { NomMarque = "Toyota" },
+            new Marque { NomMarque = "Hyundai" },
+            new Marque { NomMarque = "Kia" },
+            new Marque { NomMarque = "Ford" },
+            new Marque { NomMarque = "Volkswagen" },
+            new Marque { NomMarque = "Mercedes-Benz" },
+            new Marque { NomMarque = "BMW" },
+            new Marque { NomMarque = "Nissan" },
+            new Marque { NomMarque = "Opel" },
+            new Marque { NomMarque = "Fiat" },
+            new Marque { NomMarque = "Chevrolet" },
+            new Marque { NomMarque = "Audi" },
+            new Marque { NomMarque = "Suzuki" },
+            new Marque { NomMarque = "Mitsubishi" },
+            new Marque { NomMarque = "Seat" },
+            new Marque { NomMarque = "Skoda" }
+        );
     }
 
     private static void SeedCouleurs(AppDbContext context)
@@ -135,6 +163,9 @@ public static class PrepData
     if (context.Clients.Any())
         return;
 
+    // Toggle for Importe (alternates between true and false)
+    bool importeToggle = true;
+
     // Possible accessories and transmission types
     var possibleAccessories = new List<string>
     {
@@ -170,10 +201,11 @@ public static class PrepData
             {
                 new Voiture
                 {
-                    Marque = "Renault",
+                    MarqueId = 1, // Renault
                     Modele = "Clio",
                     CouleurId = 1, // Noir (Black)
                     Annee = 2018,
+                    Importe = importeToggle, // true
                     Immatriculation = "A-1234-BC",
                     ClientCIN = "A123456",
                     Transmission = new List<string> { "Front-Wheel Drive" },
@@ -181,10 +213,11 @@ public static class PrepData
                 },
                 new Voiture
                 {
-                    Marque = "Peugeot",
+                    MarqueId = 3, // Peugeot
                     Modele = "208",
                     CouleurId = 2, // Blanc (White)
                     Annee = 2020,
+                    Importe = !importeToggle, // false
                     Immatriculation = "A-5678-DE",
                     ClientCIN = "A123456",
                     Transmission = new List<string> { "Rear-Wheel Drive", "All-Wheel Drive" },
@@ -204,10 +237,11 @@ public static class PrepData
             {
                 new Voiture
                 {
-                    Marque = "Dacia",
+                    MarqueId = 2, // Dacia
                     Modele = "Sandero",
                     CouleurId = 2, // Blanc (White)
                     Annee = 2019,
+                    Importe = importeToggle, // true
                     Immatriculation = "B-9101-FG",
                     ClientCIN = "B654321",
                     Transmission = new List<string> { "All-Wheel Drive" },
@@ -215,10 +249,11 @@ public static class PrepData
                 },
                 new Voiture
                 {
-                    Marque = "Hyundai",
+                    MarqueId = 6, // Hyundai
                     Modele = "i20",
                     CouleurId = 1, // Noir (Black)
                     Annee = 2021,
+                    Importe = !importeToggle, // false
                     Immatriculation = "B-1121-HI",
                     ClientCIN = "B654321",
                     Transmission = new List<string> { "Front-Wheel Drive", "4x4" },
@@ -237,10 +272,11 @@ public static class PrepData
             {
                 new Voiture
                 {
-                    Marque = "Toyota",
+                    MarqueId = 5, // Toyota
                     Modele = "Corolla",
                     CouleurId = 6, // Rouge (Red)
                     Annee = 2022,
+                    Importe = importeToggle, // true
                     Immatriculation = "C-3141-JK",
                     ClientCIN = "C987654",
                     Transmission = new List<string> { "Front-Wheel Drive" },
@@ -248,10 +284,11 @@ public static class PrepData
                 },
                 new Voiture
                 {
-                    Marque = "Renault",
+                    MarqueId = 1, // Renault
                     Modele = "Megane",
                     CouleurId = 3, // Gris (Gray)
                     Annee = 2020,
+                    Importe = !importeToggle, // false
                     Immatriculation = "C-4151-LM",
                     ClientCIN = "C987654",
                     Transmission = new List<string> { "Rear-Wheel Drive", "All-Wheel Drive" },
@@ -271,10 +308,11 @@ public static class PrepData
             {
                 new Voiture
                 {
-                    Marque = "Peugeot",
+                    MarqueId = 3, // Peugeot
                     Modele = "3008",
                     CouleurId = 5, // Bleu (Blue)
                     Annee = 2021,
+                    Importe = importeToggle, // true
                     Immatriculation = "D-5161-NO",
                     ClientCIN = "D123789",
                     Transmission = new List<string> { "All-Wheel Drive" },
@@ -282,10 +320,11 @@ public static class PrepData
                 },
                 new Voiture
                 {
-                    Marque = "Citroën",
+                    MarqueId = 4, // Citroën
                     Modele = "C4",
                     CouleurId = 1, // Noir (Black)
                     Annee = 2019,
+                    Importe = !importeToggle, // false
                     Immatriculation = "D-6171-PQ",
                     ClientCIN = "D123789",
                     Transmission = new List<string> { "Front-Wheel Drive", "4x4" },
@@ -304,10 +343,11 @@ public static class PrepData
             {
                 new Voiture
                 {
-                    Marque = "Ford",
+                    MarqueId = 8, // Ford
                     Modele = "Focus",
                     CouleurId = 7, // Vert (Green)
                     Annee = 2020,
+                    Importe = importeToggle, // true
                     Immatriculation = "E-7181-RS",
                     ClientCIN = "E456123",
                     Transmission = new List<string> { "Front-Wheel Drive" },
@@ -315,10 +355,11 @@ public static class PrepData
                 },
                 new Voiture
                 {
-                    Marque = "Kia",
+                    MarqueId = 7, // Kia
                     Modele = "Sportage",
                     CouleurId = 2, // Blanc (White)
                     Annee = 2022,
+                    Importe = !importeToggle, // false
                     Immatriculation = "E-8191-TU",
                     ClientCIN = "E456123",
                     Transmission = new List<string> { "Rear-Wheel Drive", "All-Wheel Drive" },
@@ -329,5 +370,4 @@ public static class PrepData
         }
     );
 }
-    
 }

@@ -16,8 +16,8 @@ export class VoitureService {
 
    }
 
-   addVoiture(product:CreateVoitureDto):Observable<string> {
-      return this.httpClient.post<string>(apiurl+"voitures/",product);
+   addVoiture(product:CreateVoitureDto):Observable<ReadVoitureDto> {
+      return this.httpClient.post<ReadVoitureDto>(apiurl+"voitures/",product);
    }
 
    getAllVoitures(filterVoitures: FilterVoitureDto | undefined): Observable<ReadVoitureDto[]> {

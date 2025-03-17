@@ -5,7 +5,8 @@
    </div>
 } @else {
    <div class="overflow-x-auto mt-3 p-6">
-      <p-table [value]="voitures" scrollHeight="500px" [tableStyle]="{ 'min-width': '50rem' }" class="text-base!">
+      <p-table [value]="voitures" [scrollable]="true" scrollHeight="500px" [tableStyle]="{ 'min-width': '50rem' }"  
+               class="text-base!">
          <ng-template #header class="bg-[#272c34]! text-white! text-lg">
             <tr class="">
                <th class="bg-[#272c34]! text-white! text-left align-top"></th>
@@ -16,6 +17,7 @@
                <th class="bg-[#272c34]! text-white! text-left align-top">Couleur</th>
                <th class="bg-[#272c34]! text-white! text-left align-top">Accessories</th>
                <th class="bg-[#272c34]! text-white! text-left align-top">Transmission</th>
+               <th class="bg-[#272c34]! text-white! text-left align-top">Importe</th>
                <th class="bg-[#272c34]! text-white! text-left align-top">Client CIN</th>
                <th class="bg-[#272c34]! text-white! text-left align-top">Actions</th>
             </tr>
@@ -39,13 +41,17 @@
                      <span>{{ trans }}</span><br>
                   }
                </td>
-               <!--            <td class="text-left align-top">{{ voiture.transmission }}</td>-->
+               <td class="text-left align-top">
+                  <p-badge [value]="voiture.importe ? 'Oui':'Non' "
+                           [severity]="voiture.importe ? 'success':'danger'"/>
+               </td>
                <td class="text-left align-top">{{ voiture.clientCIN }}</td>
                <td class="text-left align-top">
                   <div class="space-x-2 ">
                      <app-modifier-voiture-modal
-                        [couleursList]="couleurs"
                         [voiture]="voiture"
+                        [couleursList]="couleurs"
+                        [marquesList]="marques"
                         (editVoitureEvent)="editVoiture($event)"/>
                      <app-consulter-voiture-modal [voiture]="voiture"/>
                      <app-supprimer-voiture-modal (deleteVoitureEvent)="deleteVoiture($event)" [voiture]="voiture"/>
@@ -54,8 +60,6 @@
             </tr>
          </ng-template>
       </p-table>
-      <div class="flex justify-end p-2">
-         <p-button label="Afficher Tous Les Resulat"/>
-      </div>
+
    </div>
 }

@@ -1,15 +1,17 @@
+using System.Collections.ObjectModel;
 using InitPoroject.Dto.Voiture;
 
 namespace InitPoroject.Helpers;
 
 public static class CheckFunctions
 {
-    public static string CheckCreateVoitureDto(CreateVoitureDto voitureDto)
+    public static IList<string> CheckCreateVoitureDto(CreateVoitureDto voitureDto)
     {
-        string result = string.Empty;
-        if (!Int32.TryParse(voitureDto.CouleurId, out int i))
-            result += "Couleur Id Doit Etre Un Entier";
-
-        return result;
+        IList<string> results = [];
+        if (!int.TryParse(voitureDto.CouleurId, out int CouleurId))
+             results.Add("Couleur Id Doit Etre Un Entier ");
+        if (!int.TryParse(voitureDto.MarqueId, out int MarqueId))
+            results.Add("Marque Id Doit Etre Un Entier");
+        return results;
     }
 }

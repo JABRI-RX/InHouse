@@ -15,6 +15,7 @@ import {MultiSelect} from 'primeng/multiselect';
 import {commonTransmissions} from '../../Helpers/TransmissionData';
 import {UpdateVoitureDto} from '../../Models/UpdateVoitureDto';
 import {endWith} from 'rxjs';
+import {SelectButton} from 'primeng/selectbutton';
 
 @Component({
    selector: 'app-modifier-voiture-modal',
@@ -27,7 +28,8 @@ import {endWith} from 'rxjs';
       ReactiveFormsModule,
       KeyFilter,
       Select,
-      MultiSelect
+      MultiSelect,
+      SelectButton
    ],
    templateUrl: './modifier-voiture-modal.component.html',
    styles: ``
@@ -38,11 +40,16 @@ export class ModifierVoitureModalComponent implements OnInit {
    editVoitureForm!: FormGroup;
 
    visible: boolean = false;
-   @Input() couleursList: SelectOBj[] = [];
    @Input() voiture: ReadVoitureDto | undefined;
-   marquesList: SelectOBj[] = [];
-   yearsList: SelectOBj[] = [];
+   //the colorlist,marques is brought from the partens gestionvoiture->Lister->Modifier(here)
+   @Input() couleursList: SelectOBj[] = [];
+   @Input() marquesList: SelectOBj[] = [];
+   importeOptions = [
+      {label:"Oui",value:true},
+      {label:"Non",value:false},
+   ]
    // years
+   yearsList: SelectOBj[] = [];
    //this list is used for listing all accessories to populate the whole listing
    accessoriesList: SelectOBj[] = [];
    //this list is used for listing all accessories that are selected already in the Input voiture
@@ -54,8 +61,7 @@ export class ModifierVoitureModalComponent implements OnInit {
    selectedVoitureTransmissionsList: SelectOBj[] = [];
 
    ngOnInit(): void {
-
-      this.marquesList = commonCarBrands;
+      // console.log(this.editVoitureForm.value);
       this.accessoriesList = commonAccessories;
       this.transmissionsList = commonTransmissions;
 
@@ -73,10 +79,11 @@ export class ModifierVoitureModalComponent implements OnInit {
       //we use the selectObj to map the data from the voiture
       this.editVoitureForm = new FormGroup({
          marque: new FormControl<SelectOBj>(
-            {name: `${this.voiture?.marque}`, code: `${this.voiture?.marque}`},
+            {name: `${this.voiture?.marque}`, code: `${this.voiture?.marqueId}`},
             [Validators.required]
          ),
          modele: new FormControl(this.voiture?.modele, [Validators.required]),
+         importe : new FormControl(this.voiture?.importe,[Validators.required]),
          annee: new FormControl<SelectOBj>(
             {name: `${this.voiture?.annee}`, code: `${this.voiture?.annee}`},
             [Validators.required]
@@ -104,9 +111,10 @@ export class ModifierVoitureModalComponent implements OnInit {
    editVoiture() {
       const updateVoitureDto:UpdateVoitureDto = {
          immatriculation :this.voiture?.immatriculation!,
-         marque:(this.editVoitureForm.value.marque as SelectOBj).code,
+         marqueId:this.editVoitureForm.value.marque.code,
          modele:this.modele?.value,
          annee:this.editVoitureForm.value.annee.code,
+         importe:this.editVoitureForm.value.importe,
          couleurId:this.editVoitureForm.value.couleur.code,
          accessories:(this.accessories?.value as SelectOBj[]).map(acc=>acc.code),
          transmission:(this.transmissions?.value as SelectOBj[]).map(trans=>trans.code),

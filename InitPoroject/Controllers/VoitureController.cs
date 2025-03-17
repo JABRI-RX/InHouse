@@ -45,7 +45,7 @@ public class VoitureController : ControllerBase
             return BadRequest(ModelState);
         //this is used to check for attribitues that have string value but they are int 
         var checkResult = CheckFunctions.CheckCreateVoitureDto(voitureDto);
-        if (!string.IsNullOrEmpty(checkResult))
+        if (checkResult.Any())
             return BadRequest(new {message=checkResult});
         
         var voiture = await _voitureRepository.CreateCarAsync(voitureDto.FromCreateToNormal());

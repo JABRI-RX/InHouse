@@ -16,10 +16,11 @@ import {UpdateVoitureDto} from '../../Models/UpdateVoitureDto';
 import {SelectOBj} from '../../Helpers/SelectOBj';
 import {ReadCouleur} from '../../Models/Couleur/ReadCouleur';
 import {CouleurService} from '../../Services/couleur.service';
-import {FromReadCouleurToSelectObj} from '../../Helpers/ColorsFunctions';
+import {FromReadCouleurToSelectObj, FromReadMarqueToSelectObj} from '../../Helpers/ConvertFunctions';
+import {MarqueService} from '../../Services/marque.service';
 
 @Component({
-  selector: 'app-gestion-voitures',
+   selector: 'app-gestion-voitures',
    imports: [
       FilterVoitureComponent,
       Divider,
@@ -29,89 +30,107 @@ import {FromReadCouleurToSelectObj} from '../../Helpers/ColorsFunctions';
       Button,
       FormsModule
    ],
-  templateUrl: './gestion-voitures.component.html',
-  styles: ``,
-   providers:[MessageService]
+   templateUrl: './gestion-voitures.component.html',
+   styles: ``,
+   providers: [MessageService]
 
 })
-export class GestionVoituresComponent implements OnInit{
-   voitures :ReadVoitureDto[] = [];
-   filterVoituresQuery:FilterVoitureDto| undefined;
-   //this couleurs used to pass the data to the the children that need it
-   colors:SelectOBj[] = [];
-   showForm:boolean = true;
+export class GestionVoituresComponent implements OnInit {
+   voitures: ReadVoitureDto[] = [];
+   filterVoituresQuery: FilterVoitureDto | undefined;
+   //this couleurs used to pass the data to  the children that need it (filter ,modifier ,ajouter)
+   colors: SelectOBj[] = [];
+   //this marques used to pass the data to  the children that need it (filter ,modifier ,ajouter)
+   marques: SelectOBj[] = [];
+   showForm: boolean = true;
    loadingTable: boolean = false;
-   constructor(private voitureService:VoitureService,
-               protected couleurService:CouleurService,
-               private messageService : MessageService) {
+
+   constructor(private voitureService: VoitureService,
+               private couleurService: CouleurService,
+               private marqueService:MarqueService,
+               private messageService: MessageService) {
    }
 
    ngOnInit(): void {
       //init colors
       this.couleurService.getAllCouleurs().subscribe({
-         next:(values)=>this.colors = FromReadCouleurToSelectObj(values)
-      })
-
+         next: (values) => this.colors = FromReadCouleurToSelectObj(values)
+      });
+      this.marqueService.getAllMarques().subscribe({
+         next:(values) =>this.marques = FromReadMarqueToSelectObj(values)
+      });
       this.populateVoiture(false);
    }
-   filterVoiture(voiture:FilterVoitureDto){
+
+   filterVoiture(voiture: FilterVoitureDto) {
       this.filterVoituresQuery = voiture;
       this.populateVoiture(true);
       this.filterVoituresQuery = {}
    }
-   addVoiture(voiture:CreateVoitureDto){
+
+   addVoiture(voiture: CreateVoitureDto) {
       console.log(voiture);
       this.voitureService.addVoiture(voiture).subscribe({
-         next:(value)=>{
-            this.populateVoiture(false);
-            this.messageService.add({ severity: 'success', summary: 'Stat', detail: "Voiture Cree", life: 3000 });
+         next: (value) => {
+            this.voitures.push(value);
+            this.messageService.add({severity: 'success', summary: 'Stat', detail: "Voiture Cree", life: 3000});
          },
-         error:(error:HttpErrorResponse)=>{
-            this.messageService.add({ severity: 'error', summary: 'Stat', detail: error.error.message, life: 3000 });
+         error: (error: HttpErrorResponse) => {
+            this.messageService.add({severity: 'error', summary: 'Stat', detail: error.error.message, life: 3000});
          }
       });
    }
-   populateVoiture(filterSearchState:boolean){
+
+   populateVoiture(filterSearchState: boolean) {
       this.loadingTable = true;
-      this.voitureService.getAllVoitures(filterSearchState ? this.filterVoituresQuery: undefined )
+      this.voitureService.getAllVoitures(filterSearchState ? this.filterVoituresQuery : undefined)
          .subscribe({
-            next:(value)=>{
+            next: (value) => {
                this.voitures = value;
+
                this.loadingTable = false;
             },
-            error:(error)=>{
+            error: (error) => {
                console.log("To Be Implmented")
                console.log(error)
             }
          })
    }
+
    editVoiture(updateVoitureDto: UpdateVoitureDto) {
       this.voitureService.updateVoiture(updateVoitureDto)
          .subscribe({
-            next:(readDto)=> {
-               const updateVoitureIndex = this.voitures.findIndex(v=>v.immatriculation === updateVoitureDto.immatriculation);
-               this.voitures[updateVoitureIndex].marque = updateVoitureDto.marque;
-               this.voitures[updateVoitureIndex].annee = updateVoitureDto.annee;
+            next: (readDto) => {
+               const updateVoitureIndex = this.voitures.findIndex(v => v.immatriculation === updateVoitureDto.immatriculation);
+               this.voitures[updateVoitureIndex].marque = readDto.marque;
+               this.voitures[updateVoitureIndex].annee = readDto.annee;
+               this.voitures[updateVoitureIndex].importe = readDto.importe;
                this.voitures[updateVoitureIndex].couleur = readDto.couleur;
-               this.voitures[updateVoitureIndex].modele = updateVoitureDto.modele;
-               this.voitures[updateVoitureIndex].accessories = updateVoitureDto.accessories;
-               this.voitures[updateVoitureIndex].transmission = updateVoitureDto.transmission;
-               this.messageService.add({ severity: 'success', summary: 'Stat', detail: "Voiture Modifier", life: 3000 });
+               this.voitures[updateVoitureIndex].modele = readDto.modele;
+               this.voitures[updateVoitureIndex].accessories = readDto.accessories;
+               this.voitures[updateVoitureIndex].transmission = readDto.transmission;
+               // this.voitures[updateVoitureIndex] = {
+               //    marque:readDto.marque,
+               //    annee:updateVoitureDto.annee,
+               //    importe:updateVoitureDto.importe,
+               // }
+               this.messageService.add({severity: 'success', summary: 'Stat', detail: "Voiture Modifier", life: 3000});
             },
-            error:(error:HttpErrorResponse)=>{
-               this.messageService.add({ severity: 'error', summary: 'Stat', detail: error.error.message, life: 3000 });
+            error: (error: HttpErrorResponse) => {
+               this.messageService.add({severity: 'error', summary: 'Stat', detail: error.error.message, life: 3000});
             }
          })
    }
-   deleteVoiture(immatriculation:string){
+
+   deleteVoiture(immatriculation: string) {
       this.voitureService.deleteVoiture(immatriculation)
          .subscribe({
-            next:(value)=>{
-               this.messageService.add({ severity: 'success', summary: 'Stat', detail: "Voiture Supprimer", life: 3000 });
-
-               this.populateVoiture(false);
+            next: (value) => {
+               this.messageService.add({severity: 'success', summary: 'Stat', detail: "Voiture Supprimer", life: 3000});
+               const deleteVoitureIndex = this.voitures.findIndex(v=>v.immatriculation === immatriculation);
+               this.voitures = this.voitures.splice(deleteVoitureIndex,1);
             },
-            error:(error:HttpErrorResponse)=>{
+            error: (error: HttpErrorResponse) => {
 
             }
          })

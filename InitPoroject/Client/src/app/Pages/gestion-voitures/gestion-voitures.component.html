@@ -1,18 +1,23 @@
-<p-toast />
+<p-toast/>
 <app-filter-voiture
    [couleurs]="colors"
+   [marques]="marques"
    (filterVoitureEvent)="filterVoiture($event)"
    (resetFilterEvent)="resetFilter()"></app-filter-voiture>
-<p-divider />
+<p-divider/>
 <app-lister-voiture [loadingTable]="loadingTable"
                     [couleurs]="colors"
                     [voitures]="voitures"
-
+                    [marques]="marques"
                     (deleteVoitureEvent)="deleteVoiture($event)"
                     (editVoitureEvent)="editVoiture($event)"
 ></app-lister-voiture>
-<p-divider />
+<p-divider/>
 <div class="flex justify-end m-4">
-   <p-button label="Afficher Formulair" (click)="showForm = !showForm" [variant]="showForm ? 'outlined' : undefined" />
+   <p-button label="Afficher Formulair" (click)="showForm = !showForm" [variant]="showForm ? 'outlined' : undefined"/>
 </div>
-<app-ajouter-voiture [colors]="colors" [showForm]="showForm" (addVoitureEvent)="addVoiture($event)" />
+<app-ajouter-voiture
+   [colors]="colors"
+   [marques]="marques"
+   [showForm]="showForm"
+   (addVoitureEvent)="addVoiture($event)"/>

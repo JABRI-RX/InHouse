@@ -1,44 +1,52 @@
 <div class="m-8 card bg-base-100 shadow-xl p-4">
    <p class="text-xl font-black">Filter Voitures </p>
 
-   <p-divider />
+   <p-divider/>
    <form [formGroup]="filterVoitureForm">
       <div class="flex flex-wrap gap-4 mb-6">
          <div class="flex-auto">
             <label class="  block mb-2"> Marque </label>
-            <p-select [options]="marques"   formControlName="marque"
+            <p-select [options]="marques" formControlName="marque"
                       optionLabel="name" placeholder="Par Marque"
                       class="w-full "/>
 
          </div>
          <div class="flex-auto">
             <label class="  block mb-2"> Couleur </label>
-            <p-select [options]="couleurs"  formControlName="couleur"
+            <p-select [options]="couleurs" formControlName="couleur"
                       optionLabel="name" placeholder="Par couleurs"
                       class="w-full "/>
 
          </div>
          <div class="flex-auto">
             <label class="  block mb-2"> Annee </label>
-            <p-select [options]="annees"   formControlName="annee"
+            <p-select [options]="annees" formControlName="annee"
                       optionLabel="name" placeholder="Par Annee"
                       class="w-full "/>
 
          </div>
       </div>
-      <div class="flex flex-wrap gap-4">
+      <div class="flex flex-wrap gap-4 mb-2">
          <div class="flex-auto">
-            <label   class="  block mb-2"> Immatriculation </label>
-            <input pInputText   formControlName="immatriculation" class="w-full" />
+            <label class="  block mb-2"> Immatriculation </label>
+            <input pInputText formControlName="immatriculation" class="w-full"/>
          </div>
          <div class="flex-auto">
-            <label   class="  block mb-2"> Modele  </label>
-            <input pInputText   formControlName="modele" class="w-full" />
+            <label class="  block mb-2"> Modele </label>
+            <input pInputText formControlName="modele" class="w-full"/>
          </div>
          <div class="flex-auto">
-            <label  class="  block mb-2">  Client CIN  </label>
-            <input pInputText   formControlName="clientCIN" class="w-full" />
+            <label class="  block mb-2"> Client CIN </label>
+            <input pInputText formControlName="clientCIN" class="w-full"/>
          </div>
+      </div>
+      <div class="flex flex-wrap gap-4 mb-2">
+         <div class="flex-auto">
+            <label class="  block mb-2"> Etre Importe </label>
+            <p-selectbutton [options]="importeOptions" formControlName="importe" optionLabel="label"
+                            optionValue="value"/>
+         </div>
+
       </div>
       <div class="flex justify-center lg:justify-end mt-2 space-x-3">
          <p-button label="Rréinitialiser" severity="secondary" icon="pi pi-trash" (click)="resetFilter()"/>

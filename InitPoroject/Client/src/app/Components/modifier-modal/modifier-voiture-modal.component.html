@@ -23,8 +23,13 @@
          <div class="flex-auto w-[100%]">
             <label class="  block mb-2"> Marque </label>
             <p-select [options]="marquesList" formControlName="marque"
-                      optionLabel="name" placeholder="Choisir Couleur"
+                      optionLabel="name" placeholder="Choisir Marque"
                       class="w-full "/>
+         </div>
+         <div class="flex-auto">
+            <label class="  block mb-2"> Etre Importe </label>
+            <p-selectbutton [options]="importeOptions" formControlName="importe" optionLabel="label"
+                            optionValue="value"/>
          </div>
          <div class="flex-auto">
             <label class="  block mb-2"> Client CIN </label>

@@ -10,6 +10,7 @@ import {ProgressSpinner} from 'primeng/progressspinner';
 import {Button} from 'primeng/button';
 import {UpdateVoitureDto} from '../../Models/UpdateVoitureDto';
 import {SelectOBj} from '../../Helpers/SelectOBj';
+import {Badge} from 'primeng/badge';
 
 @Component({
   selector: 'app-lister-voiture',
@@ -20,6 +21,7 @@ import {SelectOBj} from '../../Helpers/SelectOBj';
       ConsulterVoitureModalComponent,
       ProgressSpinner,
       Button,
+      Badge,
 
    ],
   templateUrl: './lister-voiture.component.html',
@@ -27,7 +29,9 @@ import {SelectOBj} from '../../Helpers/SelectOBj';
 })
 export class ListerVoitureComponent implements OnInit{
    @Input() voitures: ReadVoitureDto[]  = [];
+   //this is ued for the select object in the modifier component
    @Input() couleurs:SelectOBj[] = [];
+   @Input() marques:SelectOBj[] = [];
    @Input() loadingTable: boolean = false;
    @Output() deleteVoitureEvent = new EventEmitter<string>();
    @Output() editVoitureEvent = new EventEmitter<UpdateVoitureDto>();

@@ -1,9 +1,10 @@
 export interface FilterVoitureDto {
-   marque?: string;
+   marqueId?: string;
    modele?: string;
    annee?: string;
-   couleurId?:number
-   immatriculation?: string;
+   couleurId?:string,
+   importe?:boolean,
+   immatriculation?: string,
    accessories?:string[]
    transmission?:string[]
    clientCIN?: string;

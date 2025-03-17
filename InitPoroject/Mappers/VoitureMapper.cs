@@ -13,38 +13,44 @@ public static class VoitureMapper
         {
             Annee = voiture.Annee,
             Immatriculation = voiture.Immatriculation,
-            Marque = voiture.Marque,
+            Marque = voiture.Marque.NomMarque,
+            MarqueId = voiture.MarqueId,
             Modele = voiture.Modele,
             Couleur = voiture.Couleur.NomCouleur,
             CouleurId = voiture.CouleurId,
+            Importe = voiture.Importe,
             Accessories = voiture.Accessories,
             Transmission = voiture.Transmission,
             ClientCIN = voiture.ClientCIN
         };
     }
+
     public static Voiture FromCreateToNormal(this CreateVoitureDto voiture)
     {
         return new Voiture
         {
             Annee = voiture.Annee,
             Immatriculation = voiture.Immatriculation,
-            Marque = voiture.Marque,
+            MarqueId = int.Parse(voiture.MarqueId),
             Modele = voiture.Modele,
-            CouleurId = Int32.Parse( voiture.CouleurId)  ,
+            CouleurId = int.Parse(voiture.CouleurId),
+            Importe = voiture.Importe,
             Accessories = voiture.Accessories,
             Transmission = voiture.Transmission,
             ClientCIN = voiture.ClientCIN
         };
     }
-    public static Voiture FromUpdateToNormal(this UpdateVoitureDto voiture,string immatriculation )
+
+    public static Voiture FromUpdateToNormal(this UpdateVoitureDto voiture, string immatriculation)
     {
         return new Voiture
         {
-            Marque = voiture.Marque,
+            // Marque = voiture.Marque,
             Modele = voiture.Modele,
             Annee = voiture.Annee,
             CouleurId = voiture.CouleurId,
             Immatriculation = immatriculation,
+            Importe = voiture.Importe,
             Accessories = voiture.Accessories,
             Transmission = voiture.Transmission,
             ClientCIN = voiture.ClientCIN

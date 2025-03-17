@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace InitPoroject.Migrations
 {
     /// <inheritdoc />
-    public partial class changedcolorIdtoIntfromstrin : Migration
+    public partial class AddeMarqueIdColumn : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -30,13 +30,26 @@ namespace InitPoroject.Migrations
                 name: "Couleurs",
                 columns: table => new
                 {
-                    CouleurId = table.Column<int>(type: "int", maxLength: 50, nullable: false)
+                    CouleurId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     NomCouleur = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Couleurs", x => x.CouleurId);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Marques",
+                columns: table => new
+                {
+                    MarqueId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    NomMarque = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Marques", x => x.MarqueId);
                 });
 
             migrationBuilder.CreateTable(
@@ -63,10 +76,10 @@ namespace InitPoroject.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Marque = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    MarqueId = table.Column<int>(type: "int", nullable: false),
                     Modele = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Annee = table.Column<int>(type: "int", nullable: false),
-                    CouleurId = table.Column<int>(type: "int", maxLength: 50, nullable: false),
+                    CouleurId = table.Column<int>(type: "int", nullable: false),
                     Immatriculation = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Accessories = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Transmission = table.Column<string>(type: "nvarchar(max)", nullable: false),
@@ -88,6 +101,12 @@ namespace InitPoroject.Migrations
                         principalTable: "Couleurs",
                         principalColumn: "CouleurId",
                         onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Voitures_Marques_MarqueId",
+                        column: x => x.MarqueId,
+                        principalTable: "Marques",
+                        principalColumn: "MarqueId",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(
@@ -99,6 +118,11 @@ namespace InitPoroject.Migrations
                 name: "IX_Voitures_CouleurId",
                 table: "Voitures",
                 column: "CouleurId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Voitures_MarqueId",
+                table: "Voitures",
+                column: "MarqueId");
         }
 
         /// <inheritdoc />
@@ -115,6 +139,9 @@ namespace InitPoroject.Migrations
 
             migrationBuilder.DropTable(
                 name: "Couleurs");
+
+            migrationBuilder.DropTable(
+                name: "Marques");
         }
     }
 }

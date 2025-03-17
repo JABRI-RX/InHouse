@@ -30,7 +30,7 @@ public class ClientRepository : IClientRepository
     {
         return  await _context.Clients
             .Include(c=>c.Voitures)
-            .ThenInclude(v=>v.Couleur)
+                .ThenInclude(v=>v.Couleur)
             .FirstOrDefaultAsync(c=>c.CIN.Equals(cin));
     }
 
@@ -44,6 +44,8 @@ public class ClientRepository : IClientRepository
         return await _context.Clients
             .Include(c=>c.Voitures)
                 .ThenInclude(v=>v.Couleur)
+            .Include(c=>c.Voitures)
+                .ThenInclude(v=>v.Marque)
             .ToListAsync();
     }
     // TODO I dont know why it doesn't update the voitures 

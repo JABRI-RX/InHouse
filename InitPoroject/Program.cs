@@ -32,6 +32,7 @@ builder.Services.AddScoped<IProductRepository, ProductRepository>();
 builder.Services.AddScoped<IClientRepository,ClientRepository>();
 builder.Services.AddScoped<IVoitureRepository,VoitureRepository>();
 builder.Services.AddScoped<ICouleurRepository, CouleurRepository>();
+builder.Services.AddScoped<IMarqueRepository, MarqueRepository>();
 var app = builder.Build();
 using (var scope = app.Services.CreateScope())
 {

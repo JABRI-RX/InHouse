@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace InitPoroject.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20250313141018_changedcolorIdtoIntfromstrin")]
-    partial class changedcolorIdtoIntfromstrin
+    [Migration("20250316112241_addedImportedColumn")]
+    partial class addedImportedColumn
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -91,7 +91,6 @@ namespace InitPoroject.Migrations
                 {
                     b.Property<int>("CouleurId")
                         .ValueGeneratedOnAdd()
-                        .HasMaxLength(50)
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("CouleurId"));
@@ -104,6 +103,24 @@ namespace InitPoroject.Migrations
                     b.HasKey("CouleurId");
 
                     b.ToTable("Couleurs");
+                });
+
+            modelBuilder.Entity("InitPoroject.Domain.Entity.VoitureM.Marque", b =>
+                {
+                    b.Property<int>("MarqueId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("MarqueId"));
+
+                    b.Property<string>("NomMarque")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.HasKey("MarqueId");
+
+                    b.ToTable("Marques");
                 });
 
             modelBuilder.Entity("InitPoroject.Domain.Entity.VoitureM.Voiture", b =>
@@ -126,7 +143,6 @@ namespace InitPoroject.Migrations
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<int>("CouleurId")
-                        .HasMaxLength(50)
                         .HasColumnType("int");
 
                     b.Property<DateTime>("CreatedAt")
@@ -136,9 +152,11 @@ namespace InitPoroject.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Marque")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<bool>("Importe")
+                        .HasColumnType("bit");
+
+                    b.Property<int>("MarqueId")
+                        .HasColumnType("int");
 
                     b.Property<string>("Modele")
                         .IsRequired()
@@ -153,6 +171,8 @@ namespace InitPoroject.Migrations
                     b.HasIndex("ClientCIN");
 
                     b.HasIndex("CouleurId");
+
+                    b.HasIndex("MarqueId");
 
                     b.ToTable("Voitures");
                 });
@@ -171,9 +191,17 @@ namespace InitPoroject.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("InitPoroject.Domain.Entity.VoitureM.Marque", "Marque")
+                        .WithMany("Voitures")
+                        .HasForeignKey("MarqueId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.Navigation("Client");
 
                     b.Navigation("Couleur");
+
+                    b.Navigation("Marque");
                 });
 
             modelBuilder.Entity("InitPoroject.Domain.Entity.Client", b =>
@@ -182,6 +210,11 @@ namespace InitPoroject.Migrations
                 });
 
             modelBuilder.Entity("InitPoroject.Domain.Entity.VoitureM.Couleur", b =>
+                {
+                    b.Navigation("Voitures");
+                });
+
+            modelBuilder.Entity("InitPoroject.Domain.Entity.VoitureM.Marque", b =>
                 {
                     b.Navigation("Voitures");
                 });

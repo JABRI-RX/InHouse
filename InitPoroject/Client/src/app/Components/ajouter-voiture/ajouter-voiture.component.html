@@ -4,6 +4,13 @@
    <form [formGroup]="addVoitureForm">
       <div class="flex flex-wrap gap-4 mb-6">
          <div class="flex-auto">
+            <label class="  block mb-2"> Marque </label>
+            <p-select [options]="marques" formControlName="marque"
+                      optionLabel="name" placeholder="Choisir Marque"
+                      class="w-full "/>
+
+         </div>
+         <div class="flex-auto">
             <label class="  block mb-2"> Annee </label>
             <p-select [options]="years" formControlName="annee"
                       optionLabel="name" placeholder="Choisir Annee"
@@ -15,13 +22,7 @@
                       optionLabel="name" placeholder="Choisir Couleur"
                       class="w-full "/>
          </div>
-         <div class="flex-auto">
-            <label class="  block mb-2"> Marque </label>
-            <p-select [options]="marques" formControlName="marque"
-                      optionLabel="name" placeholder="Choisir Marque"
-                      class="w-full "/>
 
-         </div>
 
       </div>
       <div class="flex flex-wrap gap-4 mb-6">
@@ -46,26 +47,35 @@
          </div>
       </div>
       <div class="flex flex-wrap gap-2 mb-6">
+
          <div class="flex-auto">
             <label class="  block mb-2"> Accessories </label>
-            <p-multiselect [options]="accessoriesList"  formControlName="accessories"
+            <p-multiselect [options]="accessoriesList" formControlName="accessories"
                            optionLabel="name" placeholder="Choisir Accessories" [maxSelectedLabels]="3"
                            styleClass="w-full  "/>
-            <p *ngIf="accessories?.invalid && accessories?.touched" class="text-red-500">Choisir Au Mois Un Accessoire</p>
+            <p *ngIf="accessories?.invalid && accessories?.touched" class="text-red-500">Choisir Au Mois Un
+               Accessoire</p>
          </div>
 
          <div class="flex-auto">
             <label class="  block mb-2"> Transmission </label>
-            <p-multiselect [options]="transmissionList"  formControlName="transmissions"
+            <p-multiselect [options]="transmissionList" formControlName="transmissions"
                            optionLabel="name" placeholder="Choisir Transmissions " [maxSelectedLabels]="3"
                            styleClass="w-full "/>
-            <p *ngIf="transmissions?.invalid && transmissions?.touched" class="text-red-500">Choisir Au Mois Un Accessoire</p>
-
+            <p *ngIf="transmissions?.invalid && transmissions?.touched" class="text-red-500">Choisir Au Mois Un
+               Accessoire</p>
          </div>
+      </div>
+      <div class="flex flex-wrap gap-2 mb-6">
 
+         <div class="flex-auto">
+            <label class="  block mb-2"> Etre Importe </label>
+            <p-selectbutton [options]="importeOptions" formControlName="importe" optionLabel="label"
+                            optionValue="value"/>
+         </div>
       </div>
       <div class="flex justify-center lg:justify-end mt-2">
-         <p-button label="Souvegarder" icon="pi pi-plus" (click)="addVoiture()" [disabled]="false"/>
+         <p-button label="Souvegarder" icon="pi pi-plus" (click)="addVoiture()" [disabled]="addVoitureForm.invalid"/>
 
       </div>
    </form>

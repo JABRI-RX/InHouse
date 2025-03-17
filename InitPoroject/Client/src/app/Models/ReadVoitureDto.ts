@@ -1,12 +1,13 @@
 export interface ReadVoitureDto {
-   id: number;
    marque: string;
+   marqueId:number,
    modele: string;
    annee: number;
    couleur: string;
    couleurId:number,
-   immatriculation: string;
-   accessories:string[]
-   transmission:string[]
+   importe:boolean,
+   immatriculation: string,
+   accessories:string[],
+   transmission:string[],
    clientCIN: string;
 }
